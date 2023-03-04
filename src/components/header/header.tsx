@@ -1,10 +1,10 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import { Routes, RoutesNames } from '../../utils/const/const';
 import styles from '../header/header.module.scss';
 
 export default function Header() {
-  const pathname = window.location.pathname;
+  const { pathname } = useLocation();
   return (
     <header>
       <nav>

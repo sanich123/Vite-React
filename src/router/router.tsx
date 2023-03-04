@@ -3,7 +3,7 @@ import { createBrowserRouter } from 'react-router-dom';
 import React from 'react';
 import ErrorPage from '../pages/error-page/error-page';
 import AboutUs from '../pages/about-us/about-us';
-import NotFoundPage from '../pages/non-found-page/non-found-page';
+import NotFoundPage from '../pages/not-found-page/not-found-page';
 
 export const router = createBrowserRouter([
   {
