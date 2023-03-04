@@ -18,7 +18,7 @@ img {
 
 body {
   position: relative;
-  font-family: "Droid Sans", "Arial", sans-serif;
+  font-family: 'Droid Sans', 'Arial', sans-serif;
   font-weight: 400;
   font-style: normal;
   list-style: none;
@@ -28,11 +28,11 @@ body {
 .base {
   display: grid;
   grid-template-areas:
-    "header"
-    "main"
-    "footer";
+    'header'
+    'main'
+    'footer';
   grid-template-rows: min-content 1fr min-content;
-//   transition: var(--transition);
+  //   transition: var(--transition);
   margin: auto;
   height: 100vh;
   overflow-x: clip;
@@ -54,11 +54,10 @@ body {
   }
 }
 
-
 h1,
 h2,
 h3 {
-  font-family: Baloo, "Arial", sans-serif;
+  font-family: Baloo, 'Arial', sans-serif;
 }
 
 a {

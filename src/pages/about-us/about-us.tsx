@@ -1,8 +1,8 @@
-import Header from "../../components/header/header";
-import React from "react";
+import React from 'react';
+import Header from 'src/components/header/header';
 
 export default class AboutUs extends React.Component {
-    render() {
-        return <Header/>
-    }
+  render() {
+    return <Header />;
+  }
 }
