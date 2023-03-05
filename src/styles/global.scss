@@ -1,4 +1,16 @@
 @import './variables.scss';
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
 
 *,
 *::before,
@@ -17,7 +29,6 @@ img {
 }
 
 body {
-  position: relative;
   font-family: 'Droid Sans', 'Arial', sans-serif;
   font-weight: 400;
   font-style: normal;
@@ -32,26 +43,9 @@ body {
     'main'
     'footer';
   grid-template-rows: min-content 1fr min-content;
-  //   transition: var(--transition);
   margin: auto;
   height: 100vh;
   overflow-x: clip;
-  // max-width: $desktop;
-  // padding: var(--padding-desktop);
-
-  // @media screen and (width <=$notebook) {
-  //   padding: var(--padding-notebook);
-  //   max-width: $notebook;
-  // }
-
-  // @media screen and (width <=$tablet) {
-  //   padding: var(--padding-tablet);
-  //   max-width: $tablet;
-  // }
-
-  @media screen and (width <=$mobile) {
-    overflow-x: hidden;
-  }
 }
 
 h1,

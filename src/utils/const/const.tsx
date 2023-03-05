@@ -8,4 +8,8 @@ export const enum RoutesNames {
   aboutUs = 'About us',
 }
 
+export const enum LocalStorageKeys {
+  searchValue = 'searchValue',
+}
+
 export const URL_USERS = 'https://jsonplaceholder.typicode.com/users';
