@@ -1,11 +1,28 @@
-export const enum Routes {
-  main = '/',
-  aboutUs = '/about-us',
+export const Routes = {
+  main: '/',
+  aboutUs: '/about-us',
+  forms: '/forms',
 }
 
-export const enum RoutesNames {
-  main = 'Main',
-  aboutUs = 'About us',
+export const RoutesNames = {
+  main: 'Main',
+  aboutUs: 'About us',
+  forms: 'Forms'
+}
+
+export const ROUTES = {
+  main: {
+    path: '/',
+    name: 'Main',
+  },
+  aboutUs: {
+    path: '/about-us',
+    name: 'About us',
+  },
+  forms: {
+    path: '/forms',
+    name: 'Forms',
+  }
 }
 
 export const enum LocalStorageKeys {
