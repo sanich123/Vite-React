@@ -1,4 +1,6 @@
-export function applyToLocalStorage(key: string, data: string) {
+import { FormDataValues } from "src/pages/forms/forms";
+
+export function applyToLocalStorage(key: string, data: string | FormDataValues[]) {
   localStorage.setItem(key, JSON.stringify(data));
 }
 

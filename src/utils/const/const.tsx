@@ -2,13 +2,13 @@ export const Routes = {
   main: '/',
   aboutUs: '/about-us',
   forms: '/forms',
-}
+};
 
 export const RoutesNames = {
   main: 'Main',
   aboutUs: 'About us',
-  forms: 'Forms'
-}
+  forms: 'Forms',
+};
 
 export const ROUTES = {
   main: {
@@ -22,11 +22,12 @@ export const ROUTES = {
   forms: {
     path: '/forms',
     name: 'Forms',
-  }
-}
+  },
+};
 
 export const enum LocalStorageKeys {
   searchValue = 'searchValue',
+  formData = 'formData',
 }
 
 export const URL_USERS = 'https://jsonplaceholder.typicode.com/users';
