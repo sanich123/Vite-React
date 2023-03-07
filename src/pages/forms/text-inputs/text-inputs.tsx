@@ -1,7 +1,10 @@
 import React from 'react';
 import { INPUTS_TEXT_MOCKS } from 'src/utils/const/texts';
 
-export default class TextInputs extends React.Component {
+export default class TextInputs extends React.Component<{
+  nameInput: React.RefObject<HTMLInputElement>;
+  surnameInput: React.RefObject<HTMLInputElement>;
+}> {
   render() {
     return (
       <>
@@ -15,6 +18,7 @@ export default class TextInputs extends React.Component {
               required
               placeholder={placeholder}
               defaultValue="some value"
+              ref={name === 'name' ? this.props.nameInput : this.props.surnameInput}
             />
           </div>
         ))}

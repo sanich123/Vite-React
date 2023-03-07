@@ -14,13 +14,21 @@ export type FormDataValues = {
   [key: string]: FormDataEntryValue | string;
 };
 
-export default class Forms extends React.Component<{}, { data: FormDataValues[] }> {
+export default class Forms extends React.Component<
+  {},
+  { data: FormDataValues[]; disabled: boolean }
+> {
   fileInput: React.RefObject<HTMLInputElement>;
+  nameInput: React.RefObject<HTMLInputElement>;
+  surnameInput: React.RefObject<HTMLInputElement>;
   constructor(props: {}) {
     super(props);
-    this.state = { data: [] };
+    this.state = { data: [], disabled: true };
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
     this.fileInput = React.createRef();
+    this.nameInput = React.createRef();
+    this.surnameInput = React.createRef();
   }
 
   async handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -43,9 +51,12 @@ export default class Forms extends React.Component<{}, { data: FormDataValues[] 
         }
       }
       await this.setState({ data: [...this.state.data, obj] });
-      console.log(this.state.data.length);
       applyToLocalStorage(LocalStorageKeys.formData, this.state.data);
     }
+  }
+
+  handleChange(e: Event) {
+    console.log(e);
   }
 
   componentDidMount() {
@@ -53,6 +64,16 @@ export default class Forms extends React.Component<{}, { data: FormDataValues[] 
     if (savedData) {
       this.setState({ data: savedData });
     }
+    this.nameInput.current?.addEventListener('input', ({ target }) => {
+      if (target instanceof HTMLInputElement) {
+        console.log(target.value);
+      }
+    });
+    this.surnameInput.current?.addEventListener('input', ({ target }) => {
+      if (target instanceof HTMLInputElement) {
+        console.log(target.value);
+      }
+    });
   }
 
   render() {
@@ -65,14 +86,16 @@ export default class Forms extends React.Component<{}, { data: FormDataValues[] 
           encType="multipart/form-data"
           className="form"
         >
-          <TextInputs />
+          <TextInputs nameInput={this.nameInput} surnameInput={this.surnameInput} />
           <DateInputs />
           <Selects />
           <RadioInputs />
           <CheckboxesInputs />
           <FileInput fileInput={this.fileInput} />
 
-          <button type="submit">Submit the data</button>
+          <button type="submit" disabled={this.state.disabled}>
+            Submit the data
+          </button>
         </form>
         {this.state.data.length > 0 &&
           this.state.data.map(

@@ -11,7 +11,18 @@ export const INPUTS_TEXT_MOCKS = [
     placeholder: 'Where are you from',
   },
 ];
-
+export const CHECKBOXES_MOCKS = [
+  {
+    name: 'email',
+    text: 'Send me emails',
+    defaultChecked: true,
+  },
+  {
+    name: 'sms',
+    text: 'Send me sms',
+    defaultChecked: false,
+  },
+];
 export const DATE_MOCKS = [
   {
     type: 'date',

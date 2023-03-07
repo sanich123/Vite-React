@@ -10,6 +10,7 @@ export default class FileInput extends Component<{ fileInput: React.RefObject<HT
           id="input-file"
           accept="image/png, image/jpeg"
           ref={this.props.fileInput}
+          required
         />
       </div>
     );

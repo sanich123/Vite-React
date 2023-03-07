@@ -16,7 +16,7 @@ export default class DateInputs extends React.Component {
               min={min}
               max={max}
               defaultValue={defaultValue}
-              // required
+              required
             />
           </div>
         ))}
