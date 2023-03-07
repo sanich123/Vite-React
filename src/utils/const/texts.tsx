@@ -34,7 +34,7 @@ export const DATE_MOCKS = [
     name: 'time',
     min: '09:00',
     max: '18:00',
-    defaultlValue: '09:00',
+    defaultlValue: '10:01',
     title: 'Choose your delivery time:',
   },
 ];

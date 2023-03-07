@@ -14,6 +14,7 @@ export default class TextInputs extends React.Component {
               id={`input-${name}`}
               required
               placeholder={placeholder}
+              defaultValue="some value"
             />
           </div>
         ))}

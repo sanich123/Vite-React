@@ -11,7 +11,7 @@ import CheckboxesInputs from './checkboxes/checkboxes';
 import FileInput from './files/file-input';
 
 export type FormDataValues = {
-  [key: string]: FormDataEntryValue;
+  [key: string]: FormDataEntryValue | string;
 };
 
 export default class Forms extends React.Component<{}, { data: FormDataValues[] }> {
@@ -35,12 +35,15 @@ export default class Forms extends React.Component<{}, { data: FormDataValues[] 
       if (this.fileInput.current) {
         const { files } = this.fileInput.current;
         if (files) {
-          const objectUrl = URL.createObjectURL(files[0]);
+          const file = files[0];
+          const name = file.name;
+          const objectUrl = URL.createObjectURL(file);
           obj['img'] = objectUrl;
+          obj['imgName'] = name;
         }
       }
-      console.log(this.state.data);
       await this.setState({ data: [...this.state.data, obj] });
+      console.log(this.state.data.length);
       applyToLocalStorage(LocalStorageKeys.formData, this.state.data);
     }
   }
@@ -73,16 +76,17 @@ export default class Forms extends React.Component<{}, { data: FormDataValues[] 
         </form>
         {this.state.data.length > 0 &&
           this.state.data.map(
-            ({ name, surname, cities, zipcode, countries, sexuality, gender, img }, i) => {
+            ({ name, surname, cities, zipcode, countries, sexuality, gender, img, imgName }, i) => (
               <div key={`${name}${surname}${i}`}>
+                <img src={img.toString()} alt={`${imgName}`} />
                 <div>{`${surname}`}</div>
                 <div>{`${cities}`}</div>
                 <div>{`${countries}`}</div>
                 <div>{`${zipcode}`}</div>
                 <div>{`${sexuality}`}</div>
                 <div>{`${gender}`}</div>
-              </div>;
-            }
+              </div>
+            )
           )}
       </>
     );
