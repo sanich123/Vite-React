@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { createElement } from 'react';
 import Header from 'src/components/header/header';
 import { LocalStorageKeys } from 'src/utils/const/const';
 import { applyToLocalStorage, getFromLocalStorage } from 'src/utils/local-storage';
@@ -35,10 +35,11 @@ export default class Forms extends React.Component<{}, { data: FormDataValues[] 
       if (this.fileInput.current) {
         const { files } = this.fileInput.current;
         if (files) {
-          obj['img'] = files[0];
+          const objectUrl = URL.createObjectURL(files[0]);
+          obj['img'] = objectUrl;
         }
       }
-
+      console.log(this.state.data);
       await this.setState({ data: [...this.state.data, obj] });
       applyToLocalStorage(LocalStorageKeys.formData, this.state.data);
     }
@@ -72,7 +73,7 @@ export default class Forms extends React.Component<{}, { data: FormDataValues[] 
         </form>
         {this.state.data.length > 0 &&
           this.state.data.map(
-            ({ name, surname, cities, zipcode, countries, sexuality, gender, img }, i) => (
+            ({ name, surname, cities, zipcode, countries, sexuality, gender, img }, i) => {
               <div key={`${name}${surname}${i}`}>
                 <div>{`${surname}`}</div>
                 <div>{`${cities}`}</div>
@@ -80,8 +81,8 @@ export default class Forms extends React.Component<{}, { data: FormDataValues[] 
                 <div>{`${zipcode}`}</div>
                 <div>{`${sexuality}`}</div>
                 <div>{`${gender}`}</div>
-              </div>
-            )
+              </div>;
+            }
           )}
       </>
     );
