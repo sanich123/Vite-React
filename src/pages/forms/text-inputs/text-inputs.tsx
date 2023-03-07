@@ -6,7 +6,7 @@ export default class TextInputs extends React.Component {
     return (
       <>
         {INPUTS_TEXT_MOCKS.map(({ name, placeholder }) => (
-          <React.Fragment key={`${name}${placeholder}`}>
+          <div key={`${name}${placeholder}`}>
             <label htmlFor={`input-${name}`}>{`${name[0].toUpperCase()}${name.slice(1)}`}</label>
             <input
               type="text"
@@ -15,7 +15,7 @@ export default class TextInputs extends React.Component {
               required
               placeholder={placeholder}
             />
-          </React.Fragment>
+          </div>
         ))}
       </>
     );

@@ -1,0 +1,9 @@
+.form {
+  display: grid;
+  grid-auto-flow: row;
+  place-content: center;
+  padding: 30px;
+  row-gap: 20px;
+  width: 500px;
+  margin: 0 auto;
+}

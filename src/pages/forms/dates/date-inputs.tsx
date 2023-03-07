@@ -7,7 +7,7 @@ export default class DateInputs extends React.Component {
     return (
       <>
         {DATE_MOCKS.map(({ name, min, max, defaultValue, title, type }) => (
-          <React.Fragment key={`${name}${title}`}>
+          <div key={`${name}${title}`}>
             <label htmlFor={`input-${name}`}>{title}</label>
             <input
               type={type}
@@ -18,7 +18,7 @@ export default class DateInputs extends React.Component {
               defaultValue={defaultValue}
               required
             />
-          </React.Fragment>
+          </div>
         ))}
       </>
     );
