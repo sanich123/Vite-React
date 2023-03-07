@@ -1,3 +1,5 @@
+import { getFormattedDate } from "../date-utils";
+
 export const INPUTS_TEXT_MOCKS = [
   { name: 'name', placeholder: 'Enter your name' },
   {
@@ -7,6 +9,33 @@ export const INPUTS_TEXT_MOCKS = [
   {
     name: 'zipcode',
     placeholder: 'Where are you from',
+  },
+];
+
+export const DATE_MOCKS = [
+  {
+    type: 'date',
+    name: 'birthday',
+    min: '1930-01-01',
+    max: '2018-01-01',
+    defaultValue: '2018-01-01',
+    title: 'Birthday',
+  },
+  {
+    type: 'date',
+    name: 'delivery-date',
+    min: `${getFormattedDate()}`,
+    max: undefined,
+    defaultValue: `${getFormattedDate()}`,
+    title: 'Choose your delivery date:',
+  },
+  {
+    type: 'time',
+    name: 'time',
+    min: '09:00',
+    max: '18:00',
+    defaultlValue: '09:00',
+    title: 'Choose your delivery time:',
   },
 ];
 

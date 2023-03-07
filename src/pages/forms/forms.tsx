@@ -2,8 +2,8 @@ import React from 'react';
 import Header from 'src/components/header/header';
 import { LocalStorageKeys } from 'src/utils/const/const';
 import { applyToLocalStorage, getFromLocalStorage } from 'src/utils/local-storage';
+import DateInputs from './dates/date-inputs';
 import Selects from './selects/selects';
-import SelectsCountries from './selects/selects';
 import TextInputs from './text-inputs/text-inputs';
 
 export type FormDataValues = {
@@ -22,7 +22,7 @@ export default class Forms extends React.Component<{}, { data: FormDataValues[] 
     const { target } = e;
     if (target instanceof HTMLFormElement) {
       const formData = new FormData(target);
-      const obj: { [key: string]: FormDataEntryValue } = {};
+      const obj: FormDataValues = {};
       for (let [key, value] of formData) {
         obj[key] = value;
       }
@@ -44,13 +44,17 @@ export default class Forms extends React.Component<{}, { data: FormDataValues[] 
       <>
         <Header />
         <form onSubmit={this.handleSubmit} method="post" encType="multipart/form-data">
-          <TextInputs/>
-          <label htmlFor="input-birthday">Birthday</label>
-          <input type="date" name="birthday" id="input-birthday" />
-          <label htmlFor="input-select-countries">Delivery</label>
-          <Selects/>
+          <TextInputs />
+          <DateInputs/>
+          <Selects />
           <label htmlFor="radio-homosexual">I'm homosexual</label>
-          <input type="radio" name="sexuality" id="radio-homosexual" defaultChecked />
+          <input
+            type="radio"
+            name="sexuality"
+            id="radio-homosexual"
+            value="homosexual"
+            defaultChecked
+          />
           <label htmlFor="radio-lesbian">I'm lesbian</label>
           <input type="radio" name="sexuality" id="radio-lesbian" value="lesbian" />
           <label htmlFor="radio-hetero">I'm fucking hetero</label>
