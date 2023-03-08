@@ -1,8 +1,8 @@
-import React from "react";
-import { DATE_MOCKS } from "src/utils/const/texts";
+import React, { RefObject, Component } from 'react';
+import { DATE_MOCKS } from 'src/utils/const/texts';
+import { InputsRefsAsProps } from 'src/utils/types/types';
 
-export default class DateInputs extends React.Component {
-
+export default class DateInputs extends Component<InputsRefsAsProps> {
   render() {
     return (
       <>
@@ -15,9 +15,10 @@ export default class DateInputs extends React.Component {
               id={`input-${name}`}
               min={min}
               max={max}
-              defaultValue={defaultValue}
               required
+              ref={this.props.inputs[name]}
             />
+            {!this.props.inputs[name].current?.value && <div>{`Нужно выбрать ${name === 'time' ? 'время' : 'дату'}, чтобы отправить форму`}</div>}
           </div>
         ))}
       </>

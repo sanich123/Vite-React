@@ -1,10 +1,8 @@
-import React from 'react';
+import React, { RefObject } from 'react';
 import { INPUTS_TEXT_MOCKS } from 'src/utils/const/texts';
+import { InputsRefsAsProps } from 'src/utils/types/types';
 
-export default class TextInputs extends React.Component<{
-  nameInput: React.RefObject<HTMLInputElement>;
-  surnameInput: React.RefObject<HTMLInputElement>;
-}> {
+export default class TextInputs extends React.Component<InputsRefsAsProps> {
   render() {
     return (
       <>
@@ -17,9 +15,9 @@ export default class TextInputs extends React.Component<{
               id={`input-${name}`}
               required
               placeholder={placeholder}
-              defaultValue="some value"
-              ref={name === 'name' ? this.props.nameInput : this.props.surnameInput}
+              ref={this.props.inputs[name]}
             />
+            {!this.props.inputs[name].current?.value && <div>Здесь не должно быть пустое поле</div>}
           </div>
         ))}
       </>

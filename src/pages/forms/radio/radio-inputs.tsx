@@ -1,7 +1,8 @@
-import React from "react";
-import { RADIO_MOCKS } from "src/utils/const/texts";
+import React, { RefObject } from 'react';
+import { RADIO_MOCKS } from 'src/utils/const/texts';
+import { InputsRefsAsProps } from 'src/utils/types/types';
 
-export default class RadioInputs extends React.Component {
+export default class RadioInputs extends React.Component<InputsRefsAsProps> {
   render() {
     return (
       <>
@@ -13,6 +14,7 @@ export default class RadioInputs extends React.Component {
               id={`radio-${value}`}
               defaultValue={value}
               defaultChecked={defaultChecked}
+              ref={this.props.inputs[value]}
             />
             <label htmlFor={`radio-${value}`}>I'm {value}</label>
           </div>

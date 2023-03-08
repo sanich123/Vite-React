@@ -1,87 +1,19 @@
 import { getFormattedDate } from '../date-utils';
-
-export const INPUTS_TEXT_MOCKS = [
-  { name: 'name', placeholder: 'Enter your name' },
-  {
-    name: 'surname',
-    placeholder: 'Enter your surname',
-  },
-  {
-    name: 'zipcode',
-    placeholder: 'Where are you from',
-  },
-];
-export const CHECKBOXES_MOCKS = [
-  {
-    name: 'email',
-    text: 'Send me emails',
-    defaultChecked: true,
-  },
-  {
-    name: 'sms',
-    text: 'Send me sms',
-    defaultChecked: false,
-  },
-];
-export const DATE_MOCKS = [
-  {
-    type: 'date',
-    name: 'birthday',
-    min: '1930-01-01',
-    max: '2018-01-01',
-    defaultValue: '2018-01-01',
-    title: 'Birthday',
-  },
-  {
-    type: 'date',
-    name: 'delivery-date',
-    min: getFormattedDate(),
-    max: undefined,
-    defaultValue: getFormattedDate(),
-    title: 'Choose your delivery date:',
-  },
-  {
-    type: 'time',
-    name: 'time',
-    min: '09:00',
-    max: '18:00',
-    defaultlValue: '10:01',
-    title: 'Choose your delivery time:',
-  },
-];
-export const RADIO_MOCKS = [
-  {
-    type: 'radio',
-    name: 'sexuality',
-    value: 'homosexual',
-    defaultChecked: true,
-  },
-  {
-    type: 'radio',
-    name: 'sexuality',
-    value: 'hetero',
-    defaultChecked: false,
-  },
-  {
-    type: 'radio',
-    name: 'sexuality',
-    value: 'lesbian',
-    defaultChecked: false,
-  },
-  {
-    type: 'radio',
-    name: 'gender',
-    value: 'male',
-    defaultChecked: false,
-  },
-  {
-    type: 'radio',
-    name: 'gender',
-    value: 'female',
-    defaultChecked: false,
-  },
-];
-
+export const INITIAL_STATE = {
+  name: '',
+  surname: '',
+  zipcode: '',
+  birthday: '',
+  delivery: '',
+  time: '',
+  country: 'Russia',
+  city: 'Monterey',
+  sexuality: 'hetero',
+  gender: 'male',
+  subscribeEmail: 'on',
+  subscribeSms: '',
+  img: '',
+};
 export const COUNTRIES = [
   'Afghanistan',
   'Albania',
@@ -708,4 +640,94 @@ export const CITIES = [
   'Yonkers',
   'York',
   'Youngstown',
+];
+export const INPUTS_TEXT_MOCKS = [
+  { name: 'name', placeholder: 'Enter your name' },
+  {
+    name: 'surname',
+    placeholder: 'Enter your surname',
+  },
+  {
+    name: 'zipcode',
+    placeholder: 'Where are you from',
+  },
+];
+export const CHECKBOXES_MOCKS = [
+  {
+    name: 'Email',
+    text: 'Send me emails',
+    defaultChecked: true,
+  },
+  {
+    name: 'Sms',
+    text: 'Send me sms',
+    defaultChecked: false,
+  },
+];
+export const DATE_MOCKS = [
+  {
+    type: 'date',
+    name: 'birthday',
+    min: '1930-01-01',
+    max: '2018-01-01',
+    defaultValue: '2018-01-01',
+    title: 'Birthday',
+  },
+  {
+    type: 'date',
+    name: 'delivery',
+    min: getFormattedDate(),
+    max: undefined,
+    defaultValue: getFormattedDate(),
+    title: 'Choose your delivery date:',
+  },
+  {
+    type: 'time',
+    name: 'time',
+    min: '09:00',
+    max: '18:00',
+    defaultlValue: '10:01',
+    title: 'Choose your delivery time:',
+  },
+];
+export const RADIO_MOCKS = [
+  {
+    type: 'radio',
+    name: 'sexuality',
+    value: 'homosexual',
+    defaultChecked: true,
+  },
+  {
+    type: 'radio',
+    name: 'sexuality',
+    value: 'hetero',
+    defaultChecked: false,
+  },
+  {
+    type: 'radio',
+    name: 'sexuality',
+    value: 'lesbian',
+    defaultChecked: false,
+  },
+  {
+    type: 'radio',
+    name: 'gender',
+    value: 'male',
+    defaultChecked: true,
+  },
+  {
+    type: 'radio',
+    name: 'gender',
+    value: 'female',
+    defaultChecked: false,
+  },
+];
+
+export const SELECTS_MOCKS = [
+  { name: 'country', defaultValue: 'Russia', options: COUNTRIES },
+  {
+    name: 'city',
+    defaultValue: 'Monterey',
+    options: CITIES,
+  },
 ];

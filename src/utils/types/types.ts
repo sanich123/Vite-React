@@ -1,3 +1,5 @@
+import React, { RefObject } from 'react';
+
 export interface UsersType {
   id: number;
   name: string;
@@ -19,5 +21,11 @@ export interface UsersType {
     name: string;
     catchPhrase: string;
     bs: string;
+  };
+}
+
+export interface InputsRefsAsProps {
+  inputs: {
+    [key: string]: RefObject<HTMLInputElement>;
   };
 }

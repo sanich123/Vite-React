@@ -1,24 +1,28 @@
-import React from 'react';
-import { CITIES, COUNTRIES } from 'src/utils/const/texts';
+import React, { RefObject } from 'react';
+import { SELECTS_MOCKS } from 'src/utils/const/texts';
 
-export default class Selects extends React.Component {
+export default class Selects extends React.Component<{
+  [key: string]: RefObject<HTMLSelectElement>;
+}> {
   render() {
     return (
       <>
-        <select name="countries" id="input-select-countries" defaultValue="Russia" required>
-          {COUNTRIES.map((country) => (
-            <option key={country} value={country}>
-              {country}
-            </option>
-          ))}
-        </select>
-        <select name="cities" id="input-select-cities" defaultValue="Monterey" required>
-          {CITIES.map((city) => (
-            <option key={city} value={city}>
-              {city}
-            </option>
-          ))}
-        </select>
+        {SELECTS_MOCKS.map(({ name, defaultValue, options }) => (
+          <select
+            key={`${name}${defaultValue}`}
+            name={name}
+            id={`input-select-${name}`}
+            ref={name === 'country' ? this.props.countryInput : this.props.cityInput}
+            required
+            defaultValue={defaultValue}
+          >
+            {options.map((country) => (
+              <option key={country} value={country}>
+                {country}
+              </option>
+            ))}
+          </select>
+        ))}
       </>
     );
   }
