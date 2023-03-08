@@ -11,7 +11,6 @@ export const INITIAL_STATE = {
   sexuality: 'hetero',
   gender: 'male',
   subscribeEmail: 'on',
-  subscribeSms: '',
   img: '',
 };
 export const COUNTRIES = [

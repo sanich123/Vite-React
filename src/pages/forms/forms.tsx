@@ -1,4 +1,4 @@
-import React, { RefObject, createRef, FormEvent } from 'react';
+import React, { Component, RefObject, createRef, FormEvent } from 'react';
 import Header from 'src/components/header/header';
 import { LocalStorageKeys } from 'src/utils/const/const';
 import { applyToLocalStorage, getFromLocalStorage } from 'src/utils/local-storage';
@@ -23,7 +23,7 @@ export type FormState = {
   inputsState: FormDataValues;
 };
 
-export default class Forms extends React.Component<{}, FormState> {
+export default class Forms extends Component<{}, FormState> {
   fileInput: RefObject<HTMLInputElement>;
   nameInput: RefObject<HTMLInputElement>;
   surnameInput: RefObject<HTMLInputElement>;
@@ -142,13 +142,13 @@ export default class Forms extends React.Component<{}, FormState> {
           if (values.every((value) => value)) {
             this.setState({ disabled: false });
           }
-          console.log(this.state.inputsState);
         }
       })
     );
   }
 
   render() {
+    console.log(this.state.data)
     return (
       <>
         <Header />
