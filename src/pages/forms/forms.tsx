@@ -11,17 +11,8 @@ import CheckboxesInputs from './checkboxes/checkboxes';
 import FileInput from './files/file-input';
 import Cards from './cards/cards';
 import { INITIAL_STATE } from 'src/utils/const/texts';
-
-export type FormDataValues = {
-  [key: string]: FormDataEntryValue | string;
-};
-
-export type FormState = {
-  data: FormDataValues[];
-  disabled: boolean;
-  success: boolean;
-  inputsState: FormDataValues;
-};
+import { getValuesFromForm, resetInputs } from './utils';
+import { FormState } from './types/form-types';
 
 export default class Forms extends Component<{}, FormState> {
   fileInput: RefObject<HTMLInputElement>;
@@ -50,6 +41,8 @@ export default class Forms extends Component<{}, FormState> {
       inputsState: INITIAL_STATE,
     };
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.setCheckboxes = this.setCheckboxes.bind(this);
+    this.setListener = this.setListener.bind(this);
     this.fileInput = createRef();
     this.nameInput = createRef();
     this.surnameInput = createRef();
@@ -67,8 +60,28 @@ export default class Forms extends Component<{}, FormState> {
     this.emailEnabledInput = createRef();
     this.smsEnabledInput = createRef();
   }
+  getAllInputs() {
+    return [
+      this.nameInput,
+      this.surnameInput,
+      this.zipcodeInput,
+      this.birthdayInput,
+      this.deliveryInput,
+      this.timeInput,
+      this.countryInput,
+      this.cityInput,
+      this.homosexualInput,
+      this.lesbianinput,
+      this.heteroInput,
+      this.maleInput,
+      this.femaleInput,
+      this.fileInput,
+      this.emailEnabledInput,
+      this.smsEnabledInput,
+    ];
+  }
   getInputs() {
-    const INPUTS: { [key: string]: RefObject<HTMLInputElement | HTMLSelectElement> } = {
+    return {
       name: this.nameInput,
       surname: this.surnameInput,
       zipcode: this.zipcodeInput,
@@ -79,104 +92,63 @@ export default class Forms extends Component<{}, FormState> {
       city: this.cityInput,
       sexuality: this.heteroInput,
       gender: this.maleInput,
-      subscribeEmail : this.emailEnabledInput,
+      subscribeEmail: this.emailEnabledInput,
+      img: this.fileInput,
     };
-    return INPUTS;
   }
   async handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const { target } = e;
     if (target instanceof HTMLFormElement) {
-      const formData = new FormData(target);
-      const obj: FormDataValues = {};
-      for (let [key, value] of formData) {
-        obj[key] = value;
-      }
-      if (this.fileInput.current) {
-        const { files } = this.fileInput.current;
-        if (files) {
-          const file = files[0];
-          const name = file.name;
-          const objectUrl = URL.createObjectURL(file);
-          obj['img'] = objectUrl;
-          obj['imgName'] = name;
-        }
-      }
+      const obj = getValuesFromForm(target, this.fileInput);
       await this.setState({ data: [...this.state.data, obj] });
       applyToLocalStorage(LocalStorageKeys.formData, this.state.data);
       this.setState({ success: true });
+      resetInputs(this.getInputs(), INITIAL_STATE);
       setTimeout(() => this.setState({ success: false }), 2000);
-      for (let key in INITIAL_STATE) {
-        const input = this.getInputs()[key];
-        if (input) {
-          if (input.current) {
-            if (key === 'sexuality' || key === 'gender' || key === 'subscribeEmail') {
-              (input.current as HTMLInputElement).checked = true;
-            }
-            else {
-              input.current.value = INITIAL_STATE[key];
-            }
-          }
-        }
+      this.setState({ disabled: true, inputsState: INITIAL_STATE });
+    }
+  }
+  setCheckboxes(checkbox: RefObject<HTMLInputElement>, name: string) {
+    if (checkbox.current) {
+      if (checkbox.current.checked) {
+        this.setState({ inputsState: { ...this.state.inputsState, [name]: 'on' } });
+      } else {
+        this.setState({
+          inputsState: { ...this.state.inputsState, [name]: 'off' },
+        });
       }
     }
   }
-
+  setListener(input: RefObject<HTMLInputElement | HTMLSelectElement>) {
+    if (input.current) {
+        return input.current.addEventListener('change', ({ target }) => {
+          if (target instanceof HTMLInputElement || target instanceof HTMLSelectElement) {
+            const { value, name } = target;
+            if (name === 'subscribeEmail') {
+              this.setCheckboxes(this.emailEnabledInput, name);
+            } else if (name === 'subscribeSms') {
+              this.setCheckboxes(this.smsEnabledInput, name);
+            } else {
+              this.setState({ inputsState: { ...this.state.inputsState, [name]: value } });
+            }
+            const values = Object.values(this.state.inputsState);
+            if (values.every((value) => value)) {
+              this.setState({ disabled: false });
+            }
+          }
+        })
+      }
+  }
   componentDidMount() {
     const savedData = getFromLocalStorage(LocalStorageKeys.formData);
     if (savedData) {
       this.setState({ data: savedData });
     }
-    [
-      this.nameInput.current,
-      this.surnameInput.current,
-      this.zipcodeInput.current,
-      this.birthdayInput.current,
-      this.deliveryInput.current,
-      this.timeInput.current,
-      this.countryInput.current,
-      this.cityInput.current,
-      this.homosexualInput.current,
-      this.lesbianinput.current,
-      this.heteroInput.current,
-      this.maleInput.current,
-      this.femaleInput.current,
-      this.fileInput.current,
-      this.emailEnabledInput.current,
-      this.smsEnabledInput.current,
-    ].map((input) =>
-      input?.addEventListener('change', ({ target }) => {
-        if (target instanceof HTMLInputElement || target instanceof HTMLSelectElement) {
-          const { value, name } = target;
-          if (name === 'subscribeEmail') {
-            this.emailEnabledInput.current?.checked
-              ? this.setState({ inputsState: { ...this.state.inputsState, [name]: 'on' } })
-              : this.setState({
-                  inputsState: { ...this.state.inputsState, [name]: 'off' },
-                });
-          } else if (name === 'subscribeSms') {
-            this.smsEnabledInput.current?.checked
-              ? this.setState({
-                  inputsState: { ...this.state.inputsState, [name]: 'on' },
-                })
-              : this.setState({
-                  inputsState: { ...this.state.inputsState, [name]: 'off' },
-                });
-          } else {
-            this.setState({ inputsState: { ...this.state.inputsState, [name]: value } });
-          }
-
-          const values = Object.values(this.state.inputsState);
-          if (values.every((value) => value)) {
-            this.setState({ disabled: false });
-          }
-        }
-      })
-    );
+    this.getAllInputs().map((input) => this.setListener(input));
   }
 
   render() {
-
     return (
       <>
         <Header />
