@@ -67,7 +67,22 @@ export default class Forms extends Component<{}, FormState> {
     this.emailEnabledInput = createRef();
     this.smsEnabledInput = createRef();
   }
-
+  getInputs() {
+    const INPUTS: { [key: string]: RefObject<HTMLInputElement | HTMLSelectElement> } = {
+      name: this.nameInput,
+      surname: this.surnameInput,
+      zipcode: this.zipcodeInput,
+      birthday: this.birthdayInput,
+      delivery: this.deliveryInput,
+      time: this.timeInput,
+      country: this.countryInput,
+      city: this.cityInput,
+      sexuality: this.heteroInput,
+      gender: this.maleInput,
+      subscribeEmail : this.emailEnabledInput,
+    };
+    return INPUTS;
+  }
   async handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const { target } = e;
@@ -89,8 +104,21 @@ export default class Forms extends Component<{}, FormState> {
       }
       await this.setState({ data: [...this.state.data, obj] });
       applyToLocalStorage(LocalStorageKeys.formData, this.state.data);
-      this.setState({success: true});
-      setTimeout(() => this.setState({success: false}), 2000)
+      this.setState({ success: true });
+      setTimeout(() => this.setState({ success: false }), 2000);
+      for (let key in INITIAL_STATE) {
+        const input = this.getInputs()[key];
+        if (input) {
+          if (input.current) {
+            if (key === 'sexuality' || key === 'gender' || key === 'subscribeEmail') {
+              (input.current as HTMLInputElement).checked = true;
+            }
+            else {
+              input.current.value = INITIAL_STATE[key];
+            }
+          }
+        }
+      }
     }
   }
 
@@ -148,7 +176,7 @@ export default class Forms extends Component<{}, FormState> {
   }
 
   render() {
-    console.log(this.state.data)
+
     return (
       <>
         <Header />
@@ -190,7 +218,9 @@ export default class Forms extends Component<{}, FormState> {
           <button type="submit" disabled={this.state.disabled}>
             Submit the data
           </button>
-          {this.state.success && <div>Поздравляем вас, отправка формы произошла весьма успешно</div>}
+          {this.state.success && (
+            <div>Поздравляем вас, отправка формы произошла весьма успешно</div>
+          )}
         </form>
         {this.state.data.length > 0 && <Cards data={this.state.data} />}
       </>

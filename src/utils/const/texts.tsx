@@ -1,5 +1,5 @@
 import { getFormattedDate } from '../date-utils';
-export const INITIAL_STATE = {
+export const INITIAL_STATE: {[key: string]: string} = {
   name: '',
   surname: '',
   zipcode: '',
@@ -694,13 +694,13 @@ export const RADIO_MOCKS = [
     type: 'radio',
     name: 'sexuality',
     value: 'homosexual',
-    defaultChecked: true,
+    defaultChecked: false,
   },
   {
     type: 'radio',
     name: 'sexuality',
     value: 'hetero',
-    defaultChecked: false,
+    defaultChecked: true,
   },
   {
     type: 'radio',
