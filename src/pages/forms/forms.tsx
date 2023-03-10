@@ -129,6 +129,7 @@ export default class Forms extends Component<{}, FormState> {
   }
 
   render() {
+    localStorage.clear();
     return (
       <>
         <Header />
