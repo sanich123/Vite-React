@@ -60,26 +60,6 @@ export default class Forms extends Component<{}, FormState> {
     this.emailEnabledInput = createRef();
     this.smsEnabledInput = createRef();
   }
-  getAllInputs() {
-    return [
-      this.nameInput,
-      this.surnameInput,
-      this.zipcodeInput,
-      this.birthdayInput,
-      this.deliveryInput,
-      this.timeInput,
-      this.countryInput,
-      this.cityInput,
-      this.homosexualInput,
-      this.lesbianinput,
-      this.heteroInput,
-      this.maleInput,
-      this.femaleInput,
-      this.fileInput,
-      this.emailEnabledInput,
-      this.smsEnabledInput,
-    ];
-  }
   getInputs() {
     return {
       name: this.nameInput,
@@ -90,8 +70,14 @@ export default class Forms extends Component<{}, FormState> {
       time: this.timeInput,
       country: this.countryInput,
       city: this.cityInput,
+      homosexual: this.homosexualInput,
+      lesbian: this.lesbianinput,
+      hetero: this.heteroInput,
       sexuality: this.heteroInput,
+      male: this.maleInput,
+      female: this.femaleInput,
       gender: this.maleInput,
+      subscribeSms: this.smsEnabledInput,
       subscribeEmail: this.emailEnabledInput,
       img: this.fileInput,
     };
@@ -145,7 +131,7 @@ export default class Forms extends Component<{}, FormState> {
     if (savedData) {
       this.setState({ data: savedData });
     }
-    this.getAllInputs().map((input) => this.setListener(input));
+    Object.values(this.getInputs()).map((input) => this.setListener(input));
   }
 
   render() {

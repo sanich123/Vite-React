@@ -1,8 +1,8 @@
-import React, { RefObject } from 'react';
+import React, { RefObject, Component } from 'react';
 import { INPUTS_TEXT_MOCKS } from 'src/utils/const/texts';
-import { InputsRefsAsProps } from 'src/utils/types/types';
+import { InputsRefsAsProps } from '../types/form-types';
 
-export default class TextInputs extends React.Component<InputsRefsAsProps> {
+export default class TextInputs extends Component<InputsRefsAsProps> {
   render() {
     return (
       <>

@@ -24,8 +24,4 @@ export interface UsersType {
   };
 }
 
-export interface InputsRefsAsProps {
-  inputs: {
-    [key: string]: RefObject<HTMLInputElement>;
-  };
-}
+

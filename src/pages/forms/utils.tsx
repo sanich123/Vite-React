@@ -22,11 +22,14 @@ export function getValuesFromForm(target: HTMLFormElement, fileInput: RefObject<
 
 export function resetInputs(inputs: ObjOfRefs, initialState: InitialState) {
   for (let key in initialState) {
+    console.log(inputs[key], key);
     const input = inputs[key];
     if (input) {
       if (input.current) {
         if (key === 'sexuality' || key === 'gender' || key === 'subscribeEmail') {
           (input.current as HTMLInputElement).checked = true;
+        } else if (key === 'subscribeSms') {
+          (input.current as HTMLInputElement).checked = false;
         } else {
           input.current.value = initialState[key];
         }
@@ -34,3 +37,5 @@ export function resetInputs(inputs: ObjOfRefs, initialState: InitialState) {
     }
   }
 }
+
+

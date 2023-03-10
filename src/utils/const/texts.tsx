@@ -11,6 +11,7 @@ export const INITIAL_STATE: {[key: string]: string} = {
   sexuality: 'hetero',
   gender: 'male',
   subscribeEmail: 'on',
+  subscribeSms: '',
   img: '',
 };
 export const COUNTRIES = [
