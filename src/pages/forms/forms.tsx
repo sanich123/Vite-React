@@ -107,8 +107,7 @@ export default class Forms extends Component<{}, FormState> {
       return input.current.addEventListener('change', ({ target }) => {
         if (target instanceof HTMLInputElement || target instanceof HTMLSelectElement) {
           const { value, name } = target;
-          if (name === 'subscribeEmail') this.setCheckboxes(this.emailEnabledInput, name);
-          else if (name === 'subscribeSms') this.setCheckboxes(this.smsEnabledInput, name);
+          if (name === 'subscribeEmail' || name === 'subscribeSms') this.setCheckboxes(this.getInputs()[name], name);
           else this.setState({ inputsState: { ...this.state.inputsState, [name]: value } });
           if (validateInputsState(this.state.inputsState)) this.setState({ disabled: false });
         }
