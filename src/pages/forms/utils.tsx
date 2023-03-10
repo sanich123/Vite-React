@@ -34,3 +34,13 @@ export function resetInputs(inputs: ObjOfRefs, initialState: InitialState) {
     }
   }
 }
+
+export function validateInputsState(state: FormDataValues) {
+  const values = [];
+  for (let key in state) {
+    if (key !== 'subscribeEmail' && key !== 'subscribeSms') {
+      values.push(state[key]);
+    }
+  }
+  return values.every((value) => value);
+}

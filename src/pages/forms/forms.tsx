@@ -11,7 +11,7 @@ import CheckboxesInputs from './checkboxes/checkboxes';
 import FileInput from './files/file-input';
 import Cards from './cards/cards';
 import { INITIAL_STATE } from 'src/utils/const/texts';
-import { getValuesFromForm, resetInputs } from './utils';
+import { getValuesFromForm, resetInputs, validateInputsState } from './utils';
 import { FormState } from './types/form-types';
 
 export default class Forms extends Component<{}, FormState> {
@@ -107,17 +107,10 @@ export default class Forms extends Component<{}, FormState> {
       return input.current.addEventListener('change', ({ target }) => {
         if (target instanceof HTMLInputElement || target instanceof HTMLSelectElement) {
           const { value, name } = target;
-          if (name === 'subscribeEmail') {
-            this.setCheckboxes(this.emailEnabledInput, name);
-          } else if (name === 'subscribeSms') {
-            this.setCheckboxes(this.smsEnabledInput, name);
-          } else {
-            this.setState({ inputsState: { ...this.state.inputsState, [name]: value } });
-          }
-          const values = Object.values(this.state.inputsState);
-          if (values.every((value) => value)) {
-            this.setState({ disabled: false });
-          }
+          if (name === 'subscribeEmail') this.setCheckboxes(this.emailEnabledInput, name);
+          else if (name === 'subscribeSms') this.setCheckboxes(this.smsEnabledInput, name);
+          else this.setState({ inputsState: { ...this.state.inputsState, [name]: value } });
+          if (validateInputsState(this.state.inputsState)) this.setState({ disabled: false });
         }
       });
     }
@@ -129,7 +122,6 @@ export default class Forms extends Component<{}, FormState> {
   }
 
   render() {
-    localStorage.clear();
     return (
       <>
         <Header />
