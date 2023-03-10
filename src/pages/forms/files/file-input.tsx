@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Warnings } from 'src/utils/const/texts';
 
 export default class FileInput extends Component<{ fileInput: React.RefObject<HTMLInputElement> }> {
   render() {
@@ -6,7 +7,7 @@ export default class FileInput extends Component<{ fileInput: React.RefObject<HT
     const fileInput = this.props.fileInput.current;
     if (fileInput) {
       if (fileInput.files) {
-        filesLength = fileInput.files.length
+        filesLength = fileInput.files.length;
       }
     }
     return (
@@ -21,9 +22,7 @@ export default class FileInput extends Component<{ fileInput: React.RefObject<HT
           name="img"
           className="input__file"
         />
-        {!filesLength && (
-          <div className="warning">Обязательно нужно выбрать какой-то файл</div>
-        )}
+        {filesLength === 0 && <div className="warning">{Warnings.inputFile}</div>}
       </div>
     );
   }

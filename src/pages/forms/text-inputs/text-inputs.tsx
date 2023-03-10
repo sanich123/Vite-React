@@ -1,5 +1,5 @@
-import React, { RefObject, Component } from 'react';
-import { INPUTS_TEXT_MOCKS } from 'src/utils/const/texts';
+import React, { Component } from 'react';
+import { INPUTS_TEXT_MOCKS, Warnings } from 'src/utils/const/texts';
 import { InputsRefsAsProps } from '../types/form-types';
 
 export default class TextInputs extends Component<InputsRefsAsProps> {
@@ -18,7 +18,7 @@ export default class TextInputs extends Component<InputsRefsAsProps> {
               ref={this.props.inputs[name]}
               className="input__text"
             />
-            {!this.props.inputs[name].current?.value && <div className="warning">Здесь не должно быть пустое поле</div>}
+            {!this.props.inputs[name].current?.value && <div className="warning">{Warnings.inputText}</div>}
           </div>
         ))}
       </>

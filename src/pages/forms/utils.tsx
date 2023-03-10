@@ -1,4 +1,5 @@
 import React, { RefObject } from 'react';
+import { InputKeys } from 'src/utils/const/const';
 import { FormDataValues, InitialState, ObjOfRefs } from './types/form-types';
 
 export function getValuesFromForm(target: HTMLFormElement, fileInput: RefObject<HTMLInputElement>) {
@@ -13,8 +14,8 @@ export function getValuesFromForm(target: HTMLFormElement, fileInput: RefObject<
       const file = files[0];
       const name = file.name;
       const objectUrl = URL.createObjectURL(file);
-      valuesFromForm['img'] = objectUrl;
-      valuesFromForm['imgName'] = name;
+      valuesFromForm[InputKeys.img] = objectUrl;
+      valuesFromForm[InputKeys.imgName] = name;
     }
   }
   return valuesFromForm;
@@ -24,9 +25,13 @@ export function resetInputs(inputs: ObjOfRefs, initialState: InitialState) {
   for (let key in initialState) {
     const input = inputs[key];
     if (input.current instanceof HTMLInputElement) {
-      if (key === 'sexuality' || key === 'gender' || key === 'subscribeEmail') {
+      if (
+        key === InputKeys.sexuality ||
+        key === InputKeys.gender ||
+        key === InputKeys.subscribeEmail
+      ) {
         input.current.checked = true;
-      } else if (key === 'subscribeSms') {
+      } else if (key === InputKeys.subscribeSms) {
         input.current.checked = false;
       } else {
         input.current.value = initialState[key];
@@ -38,7 +43,7 @@ export function resetInputs(inputs: ObjOfRefs, initialState: InitialState) {
 export function validateInputsState(state: FormDataValues) {
   const values = [];
   for (let key in state) {
-    if (key !== 'subscribeEmail' && key !== 'subscribeSms') {
+    if (key !== InputKeys.subscribeEmail && key !== InputKeys.subscribeSms) {
       values.push(state[key]);
     }
   }

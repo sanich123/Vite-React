@@ -1,5 +1,14 @@
+import { InitialState } from 'src/pages/forms/types/form-types';
 import { getFormattedDate } from '../date-utils';
-export const INITIAL_STATE: {[key: string]: string} = {
+
+export const enum Warnings {
+  inputText = 'Здесь не должно быть пустое поле',
+  inputFile = 'Обязательно нужно выбрать какой-то файл',
+  dataRequirings = 'Date must be below 01 January 2024',
+  timeRequirings = 'Time must be from 10 till 18',
+}
+
+export const INITIAL_STATE: InitialState = {
   name: '',
   surname: '',
   zipcode: '',
@@ -14,6 +23,7 @@ export const INITIAL_STATE: {[key: string]: string} = {
   subscribeSms: '',
   img: '',
 };
+
 export const COUNTRIES = [
   'Afghanistan',
   'Albania',
@@ -641,6 +651,7 @@ export const CITIES = [
   'York',
   'Youngstown',
 ];
+
 export const INPUTS_TEXT_MOCKS = [
   { name: 'name', placeholder: 'Enter your name' },
   {
@@ -652,6 +663,7 @@ export const INPUTS_TEXT_MOCKS = [
     placeholder: 'Where are you from',
   },
 ];
+
 export const CHECKBOXES_MOCKS = [
   {
     name: 'Email',
@@ -664,6 +676,7 @@ export const CHECKBOXES_MOCKS = [
     defaultChecked: false,
   },
 ];
+
 export const DATE_MOCKS = [
   {
     type: 'date',
@@ -677,7 +690,7 @@ export const DATE_MOCKS = [
     type: 'date',
     name: 'delivery',
     min: getFormattedDate(),
-    max: undefined,
+    max: '2024-01-01',
     defaultValue: getFormattedDate(),
     title: 'Choose your delivery date:',
   },
@@ -690,6 +703,7 @@ export const DATE_MOCKS = [
     title: 'Choose your delivery time:',
   },
 ];
+
 export const RADIO_MOCKS = [
   {
     type: 'radio',

@@ -31,3 +31,14 @@ export const enum LocalStorageKeys {
 }
 
 export const URL_USERS = 'https://jsonplaceholder.typicode.com/users';
+
+export const enum InputKeys {
+  subscribeEmail = 'subscribeEmail',
+  subscribeSms = 'subscribeSms',
+  sexuality = 'sexuality',
+  gender = 'gender',
+  img = 'img',
+  imgName = 'imgName',
+  delivery = 'delivery',
+  time = 'time',
+}

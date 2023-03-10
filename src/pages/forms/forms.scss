@@ -1,14 +1,14 @@
 .form {
   display: grid;
   grid-template-areas:
-  'name surname'
-  'zipcode birthday'
-  'delivery time'
-  'selects file'
-  'radios checkboxes'
-  'submit-btn submit-btn';
+    'name surname'
+    'zipcode birthday'
+    'delivery time'
+    'selects file'
+    'radios checkboxes'
+    'submit-btn submit-btn'
+    'success-msg success-msg';
   grid-template-columns: 1fr 1fr;
-  // grid-template-rows: repeat(5, auto);
   gap: 5px;
   place-content: center;
   padding: 30px;
@@ -17,6 +17,19 @@
 .warning {
   color: red;
   font: 12px Open-Sans italic;
+}
+.success-message {
+  grid-area: success-msg;
+  display: grid;
+  place-items: center;
+  color: green;
+  text-transform: uppercase;
+  font: 1.5rem Open-Sans bold;
+  background-color: lightgreen;
+  text-align: center;
+  height: 100px;
+  transition: 3s;
+  transform: translateY(-400px);
 }
 
 .input__wrapper {
@@ -37,6 +50,9 @@
   border: 2px solid lightblue;
   border-radius: 5px;
   padding-left: 15px;
+}
+.input__select {
+  background: white;
 }
 
 .input__wrapper--select {
@@ -63,7 +79,7 @@
   font: 1.2rem Open-Sans bold;
   justify-self: center;
   cursor: pointer;
-  transition: .5s;
+  transition: 0.5s;
   &:hover {
     transform: scale(1.1);
     background-color: lightcoral;
@@ -74,7 +90,8 @@
   }
 }
 
-.checkbox__wrapper, .radio__wrapper {
+.checkbox__wrapper,
+.radio__wrapper {
   display: grid;
   grid-template-columns: min-content auto;
   gap: 5px;

@@ -1,18 +1,18 @@
 import React, { Component, RefObject, createRef, FormEvent } from 'react';
 import Header from 'src/components/header/header';
-import { LocalStorageKeys } from 'src/utils/const/const';
-import { applyToLocalStorage, getFromLocalStorage } from 'src/utils/local-storage';
 import DateInputs from './dates/date-inputs';
 import RadioInputs from './radio/radio-inputs';
 import Selects from './selects/selects';
 import TextInputs from './text-inputs/text-inputs';
-import './forms.scss';
 import CheckboxesInputs from './checkboxes/checkboxes';
 import FileInput from './files/file-input';
 import Cards from './cards/cards';
+import { LocalStorageKeys, InputKeys } from 'src/utils/const/const';
+import { applyToLocalStorage, getFromLocalStorage } from 'src/utils/local-storage';
 import { INITIAL_STATE } from 'src/utils/const/texts';
 import { getValuesFromForm, resetInputs, validateInputsState } from './utils';
 import { FormState } from './types/form-types';
+import './forms.scss';
 
 export default class Forms extends Component<{}, FormState> {
   fileInput: RefObject<HTMLInputElement>;
@@ -91,7 +91,7 @@ export default class Forms extends Component<{}, FormState> {
       applyToLocalStorage(LocalStorageKeys.formData, this.state.data);
       this.setState({ success: true });
       resetInputs(this.getInputs(), INITIAL_STATE);
-      setTimeout(() => this.setState({ success: false }), 2000);
+      setTimeout(() => this.setState({ success: false }), 3000);
       this.setState({ disabled: true, inputsState: INITIAL_STATE });
     }
   }
@@ -107,7 +107,8 @@ export default class Forms extends Component<{}, FormState> {
       return input.current.addEventListener('change', ({ target }) => {
         if (target instanceof HTMLInputElement || target instanceof HTMLSelectElement) {
           const { value, name } = target;
-          if (name === 'subscribeEmail' || name === 'subscribeSms') this.setCheckboxes(this.getInputs()[name], name);
+          if (name === InputKeys.subscribeEmail || name === InputKeys.subscribeSms)
+            this.setCheckboxes(this.getInputs()[name], name);
           else this.setState({ inputsState: { ...this.state.inputsState, [name]: value } });
           if (validateInputsState(this.state.inputsState)) this.setState({ disabled: false });
         }
@@ -164,7 +165,9 @@ export default class Forms extends Component<{}, FormState> {
             Submit
           </button>
           {this.state.success && (
-            <div>Поздравляем вас, отправка формы произошла весьма успешно</div>
+            <div className="success-message">
+              Поздравляем вас, отправка формы произошла весьма успешно
+            </div>
           )}
         </form>
         {this.state.data.length > 0 && <Cards data={this.state.data} />}
