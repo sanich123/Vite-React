@@ -97,40 +97,34 @@ export default class Forms extends Component<{}, FormState> {
   }
   setCheckboxes(checkbox: RefObject<HTMLInputElement>, name: string) {
     if (checkbox.current) {
-      if (checkbox.current.checked) {
-        this.setState({ inputsState: { ...this.state.inputsState, [name]: 'on' } });
-      } else {
-        this.setState({
-          inputsState: { ...this.state.inputsState, [name]: 'off' },
-        });
-      }
+      checkbox.current.checked
+        ? this.setState({ inputsState: { ...this.state.inputsState, [name]: 'on' } })
+        : this.setState({ inputsState: { ...this.state.inputsState, [name]: 'off' } });
     }
   }
   setListener(input: RefObject<HTMLInputElement | HTMLSelectElement>) {
     if (input.current) {
-        return input.current.addEventListener('change', ({ target }) => {
-          if (target instanceof HTMLInputElement || target instanceof HTMLSelectElement) {
-            const { value, name } = target;
-            if (name === 'subscribeEmail') {
-              this.setCheckboxes(this.emailEnabledInput, name);
-            } else if (name === 'subscribeSms') {
-              this.setCheckboxes(this.smsEnabledInput, name);
-            } else {
-              this.setState({ inputsState: { ...this.state.inputsState, [name]: value } });
-            }
-            const values = Object.values(this.state.inputsState);
-            if (values.every((value) => value)) {
-              this.setState({ disabled: false });
-            }
+      return input.current.addEventListener('change', ({ target }) => {
+        if (target instanceof HTMLInputElement || target instanceof HTMLSelectElement) {
+          const { value, name } = target;
+          if (name === 'subscribeEmail') {
+            this.setCheckboxes(this.emailEnabledInput, name);
+          } else if (name === 'subscribeSms') {
+            this.setCheckboxes(this.smsEnabledInput, name);
+          } else {
+            this.setState({ inputsState: { ...this.state.inputsState, [name]: value } });
           }
-        })
-      }
+          const values = Object.values(this.state.inputsState);
+          if (values.every((value) => value)) {
+            this.setState({ disabled: false });
+          }
+        }
+      });
+    }
   }
   componentDidMount() {
     const savedData = getFromLocalStorage(LocalStorageKeys.formData);
-    if (savedData) {
-      this.setState({ data: savedData });
-    }
+    if (savedData) this.setState({ data: savedData });
     Object.values(this.getInputs()).map((input) => this.setListener(input));
   }
 
