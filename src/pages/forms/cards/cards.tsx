@@ -27,36 +27,27 @@ export default class Cards extends Component<{ data: FormDataValues[] }> {
             i
           ) => (
             <div key={`${name}${surname}${i}`} className="cards__item item">
-              <img src={img.toString()} alt={`${imgName}`} width="80px" height="80px" />
+              <img
+                src={img.toString()}
+                alt={`${imgName}`}
+                width="150px"
+                height="150px"
+                className="item__img"
+              />
               <div className="item__surname">
-                <span className="item__text">{`My family: ${surname}`}</span>
-              </div>
-              <div className="item__name">
-                <span className="item__text">{`My name: ${name}`}</span>
+                <span className="item__text">{`${name} ${surname}`}</span>
               </div>
               <div className="item__zipcode">
-                <span className="item__text">{`My zipcode: ${zipcode}`}</span>
+                <span className="item__text">{`Zipcode: ${zipcode}`}</span>
               </div>
               <div className="item__birthday">
-                <span className="item__text">{`My birthday: ${birthday}`}</span>
+                <span className="item__text">{`Was born at: ${birthday}`}</span>
               </div>
               <div className="item__delivery">
-                <span className="item__text">{`My delivery: ${delivery}`}</span>
-              </div>
-              <div className="item__time">
-                <span className="item__text">{`My delivery time: ${time}`}</span>
-              </div>
-              <div className="item__city">
-                <span className="item__text">{`My city: ${city}`}</span>
-              </div>
-              <div className="item__country">
-                <span className="item__text">{`My country: ${country}`}</span>
+                <span className="item__text">{`Deliver before ${delivery}, at ${time} in ${city}, ${country}`}</span>
               </div>
               <div className="item__sexuality">
-                <span className="item__text">{`I'm :${sexuality}`}</span>
-              </div>
-              <div className="item__gender">
-                <span className="item__text">{`My gender is: ${gender}`}</span>
+                <span className="item__text">{`I'm: ${gender} and ${sexuality}`}</span>
               </div>
               <div className="item__email">
                 <span className="item__text">{`Send me emails: ${
