@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from 'react';
+import { ChangeEvent, Component } from 'react';
 import Header from 'src/components/header/header';
 import { UsersType } from 'src/utils/types/types';
 import Loader from 'src/components/loader/loader';
@@ -6,15 +6,16 @@ import Card from 'src/components/card/card';
 import { LocalStorageKeys, URL_USERS } from 'src/utils/const/const';
 import { applyToLocalStorage, getFromLocalStorage } from 'src/utils/local-storage';
 import '../../styles/entry.scss';
-import styles from './main.module.scss';
+import './main.scss';
 import { Grid, TextField } from '@mui/material';
+import React from 'react';
 
 interface MainState {
   users: UsersType[];
   searchQuery: string;
 }
 
-export default class Main extends React.Component<{}, MainState> {
+export default class Main extends Component<{}, MainState> {
   constructor(props: {}) {
     super(props);
     this.state = { users: [], searchQuery: '' };
@@ -35,9 +36,8 @@ export default class Main extends React.Component<{}, MainState> {
   }
 
   render() {
-    const { page__body } = styles;
     return (
-      <div className={page__body}>
+      <div className="page__body">
         <Header />
         <TextField
           variant="outlined"
@@ -49,9 +49,9 @@ export default class Main extends React.Component<{}, MainState> {
           helperText="Type words and you'll find!"
         />
         {this.state.users.length === 0 && <Loader />}
-        <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-          {this.state.users.length &&
-            this.state.users.map(
+        {this.state.users.length > 0 && (
+          <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+            {this.state.users.map(
               ({ id, ...rest }) =>
                 JSON.stringify(rest).includes(this.state.searchQuery) && (
                   <Grid item xs={3} key={id}>
@@ -59,7 +59,8 @@ export default class Main extends React.Component<{}, MainState> {
                   </Grid>
                 )
             )}
-        </Grid>
+          </Grid>
+        )}
       </div>
     );
   }

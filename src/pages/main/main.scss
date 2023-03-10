@@ -1,0 +1,11 @@
+.page__body {
+  padding: 1.5rem;
+  display: grid;
+  grid-template-rows: min-content min-content 70vh;
+}
+
+.lds-heart {
+  display: grid;
+  justify-self: center;
+  align-self: center;
+}
