@@ -1,0 +1,20 @@
+.cards {
+  display: grid;
+  width: auto;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  &__item {
+    display: grid;
+    place-content: center;
+    grid-auto-flow: row;
+    width: 300px;
+    background-color: lightblue;
+    border-radius: 5%;
+    color: white;
+    text-transform: uppercase;
+
+  }
+  .item {
+    padding: 20px;
+  }
+}

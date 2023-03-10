@@ -24,16 +24,8 @@ body {
   min-height: 100vh;
 }
 
-.base {
-  display: grid;
-  grid-template-areas:
-    'header'
-    'main'
-    'footer';
-  grid-template-rows: min-content 1fr min-content;
-  margin: auto;
-  height: 100vh;
-  overflow-x: clip;
+#root {
+  padding: 20px;
 }
 
 h1,

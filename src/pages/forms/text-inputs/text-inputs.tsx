@@ -7,7 +7,7 @@ export default class TextInputs extends Component<InputsRefsAsProps> {
     return (
       <>
         {INPUTS_TEXT_MOCKS.map(({ name, placeholder }) => (
-          <div key={`${name}${placeholder}`}>
+          <div key={`${name}${placeholder}`} className={`input__wrapper input-${name}`}>
             <label htmlFor={`input-${name}`}>{`${name[0].toUpperCase()}${name.slice(1)}`}</label>
             <input
               type="text"
@@ -16,8 +16,9 @@ export default class TextInputs extends Component<InputsRefsAsProps> {
               required
               placeholder={placeholder}
               ref={this.props.inputs[name]}
+              className="input__text"
             />
-            {!this.props.inputs[name].current?.value && <div>Здесь не должно быть пустое поле</div>}
+            {!this.props.inputs[name].current?.value && <div className="warning">Здесь не должно быть пустое поле</div>}
           </div>
         ))}
       </>

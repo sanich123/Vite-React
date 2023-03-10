@@ -153,6 +153,7 @@ export default class Forms extends Component<{}, FormState> {
             }}
           />
           <Selects countryInput={this.countryInput} cityInput={this.cityInput} />
+          <FileInput fileInput={this.fileInput} />
           <RadioInputs
             inputs={{
               homosexual: this.homosexualInput,
@@ -165,10 +166,10 @@ export default class Forms extends Component<{}, FormState> {
           <CheckboxesInputs
             emailEnabledInput={this.emailEnabledInput}
             smsEnabledInput={this.smsEnabledInput}
+            disabled={this.state.disabled}
           />
-          <FileInput fileInput={this.fileInput} />
-          <button type="submit" disabled={this.state.disabled}>
-            Submit the data
+          <button type="submit" disabled={this.state.disabled} className="submit-btn">
+            Submit
           </button>
           {this.state.success && (
             <div>Поздравляем вас, отправка формы произошла весьма успешно</div>

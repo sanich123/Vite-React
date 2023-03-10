@@ -1,9 +1,114 @@
 .form {
   display: grid;
-  grid-auto-flow: row;
+  grid-template-areas:
+  'name surname'
+  'zipcode birthday'
+  'delivery time'
+  'selects file'
+  'radios checkboxes'
+  'submit-btn submit-btn';
+  grid-template-columns: 1fr 1fr;
+  // grid-template-rows: repeat(5, auto);
+  gap: 5px;
   place-content: center;
   padding: 30px;
-  row-gap: 20px;
-  width: 500px;
   margin: 0 auto;
+}
+.warning {
+  color: red;
+  font: 12px Open-Sans italic;
+}
+
+.input__wrapper {
+  display: grid;
+  grid-template-rows: repeat(3, min-content);
+  gap: 5px;
+  padding: 0 10px;
+  fieldset {
+    border-radius: 5px;
+    border: 2px solid lightblue;
+  }
+}
+
+.input__text,
+.input__date,
+.input__select {
+  height: 40px;
+  border: 2px solid lightblue;
+  border-radius: 5px;
+  padding-left: 15px;
+}
+
+.input__wrapper--select {
+  display: grid;
+  grid-row-gap: 8px;
+}
+
+.input__file {
+  padding: 10px;
+}
+
+.submit-btn {
+  border: none;
+  outline: none;
+  background-color: lightblue;
+  grid-area: submit-btn;
+  border-radius: 5px;
+  height: 40px;
+  width: 200px;
+  display: grid;
+  padding: 10px;
+  color: white;
+  text-transform: uppercase;
+  font: 1.2rem Open-Sans bold;
+  justify-self: center;
+  cursor: pointer;
+  transition: .5s;
+  &:hover {
+    transform: scale(1.1);
+    color: yellow;
+    background-color: lightcoral;
+  }
+}
+
+.checkbox__wrapper, .radio__wrapper {
+  display: grid;
+  grid-template-columns: min-content auto;
+  gap: 5px;
+}
+
+.input-name {
+  grid-area: name;
+}
+
+.input-surname {
+  grid-area: surname;
+}
+
+.input-zipcode {
+  grid-area: zipcode;
+}
+.input-birthday {
+  grid-area: birthday;
+}
+.input-delivery {
+  grid-area: delivery;
+}
+.input-time {
+  grid-area: time;
+}
+
+.input-selects {
+  grid-area: selects;
+}
+
+.input-radios {
+  grid-area: radios;
+}
+.input-file {
+  grid-area: file;
+}
+
+.input-checkboxes {
+  grid-area: checkboxes;
 }

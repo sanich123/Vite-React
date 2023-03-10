@@ -6,7 +6,7 @@ export default class Selects extends React.Component<{
 }> {
   render() {
     return (
-      <>
+      <div className="input__wrapper input__wrapper--select input-selects">
         {SELECTS_MOCKS.map(({ name, defaultValue, options }) => (
           <select
             key={`${name}${defaultValue}`}
@@ -15,6 +15,7 @@ export default class Selects extends React.Component<{
             ref={name === 'country' ? this.props.countryInput : this.props.cityInput}
             required
             defaultValue={defaultValue}
+            className="input__select"
           >
             {options.map((country) => (
               <option key={country} value={country}>
@@ -23,7 +24,7 @@ export default class Selects extends React.Component<{
             ))}
           </select>
         ))}
-      </>
+      </div>
     );
   }
 }
