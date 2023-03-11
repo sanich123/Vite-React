@@ -2,8 +2,8 @@ import { InitialState } from 'src/pages/forms/types/form-types';
 import { getFormattedDate } from '../date-utils';
 
 export const enum Warnings {
-  inputText = 'Здесь не должно быть пустое поле',
-  inputFile = 'Обязательно нужно выбрать какой-то файл',
+  inputText = 'This field sholdn\'t be empty',
+  inputFile = 'You are required to add a file',
   dataRequirings = 'Date must be below 01 January 2024',
   timeRequirings = 'Time must be from 10 till 18',
 }
