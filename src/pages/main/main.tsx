@@ -1,4 +1,4 @@
-import { ChangeEvent, Component } from 'react';
+import React, { ChangeEvent, Component } from 'react';
 import Header from 'src/components/header/header';
 import { UsersType } from 'src/utils/types/types';
 import Loader from 'src/components/loader/loader';
@@ -7,8 +7,6 @@ import { LocalStorageKeys, URL_USERS } from 'src/utils/const/const';
 import { applyToLocalStorage, getFromLocalStorage } from 'src/utils/local-storage';
 import '../../styles/entry.scss';
 import './main.scss';
-import { TextField } from '@mui/material';
-import React from 'react';
 import InputSearch from 'src/components/search/input-search';
 
 interface MainState {
@@ -16,12 +14,13 @@ interface MainState {
   searchQuery: string;
 }
 
-export default class Main extends Component<{}, MainState> {
-  constructor(props: {}) {
+export default class Main extends Component<Record<string, never>, MainState> {
+  constructor(props: Record<string, never>) {
     super(props);
     this.state = { users: [], searchQuery: '' };
     this.handleChange = this.handleChange.bind(this);
   }
+
   async componentDidMount() {
     const response = await fetch(URL_USERS);
     const users = await response.json();

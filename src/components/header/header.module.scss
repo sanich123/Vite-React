@@ -1,17 +1,17 @@
 .active {
   color: #646cff;
-
 }
 
 .notActive {
   opacity: 0.5;
 }
 
-.active, .notActive {
+.active,
+.notActive {
   display: inline-block;
   font-size: 1.5rem;
   text-transform: uppercase;
-  transition: .5s;
+  transition: 0.5s;
   &:hover {
     transform: scale(1.1);
   }
@@ -21,7 +21,7 @@
   padding: 1.5rem;
 }
 
-.header__ul {
+.headerUl {
   list-style: none;
   margin: 0;
   padding: 0;
