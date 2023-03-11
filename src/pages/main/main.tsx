@@ -7,8 +7,9 @@ import { LocalStorageKeys, URL_USERS } from 'src/utils/const/const';
 import { applyToLocalStorage, getFromLocalStorage } from 'src/utils/local-storage';
 import '../../styles/entry.scss';
 import './main.scss';
-import { Grid, TextField } from '@mui/material';
+import { TextField } from '@mui/material';
 import React from 'react';
+import InputSearch from 'src/components/search/input-search';
 
 interface MainState {
   users: UsersType[];
@@ -39,27 +40,18 @@ export default class Main extends Component<{}, MainState> {
     return (
       <div className="page__body">
         <Header />
-        <TextField
-          variant="outlined"
-          label="Find something"
-          inputProps={{ inputMode: 'search', placeholder: 'Type search words' }}
-          onChange={this.handleChange}
-          value={this.state.searchQuery}
-          fullWidth
-          helperText="Type words and you'll find!"
-        />
+        <InputSearch handleChange={this.handleChange} searchQuery={this.state.searchQuery} />
+
         {this.state.users.length === 0 && <Loader />}
         {this.state.users.length > 0 && (
-          <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+          <section className="cards">
             {this.state.users.map(
               ({ id, ...rest }) =>
                 JSON.stringify(rest).includes(this.state.searchQuery) && (
-                  <Grid item xs={3} key={id}>
-                    <Card key={id} user={rest} />
-                  </Grid>
+                  <Card key={id} user={rest} />
                 )
             )}
-          </Grid>
+          </section>
         )}
       </div>
     );

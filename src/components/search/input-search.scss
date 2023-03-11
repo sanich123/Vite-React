@@ -1,0 +1,25 @@
+.inputs-search-wrapper {
+  display: grid;
+  grid-template-rows: min-content 1fr;
+}
+#search-input {
+  display: block;
+  height: 50px;
+  border-radius: 5px;
+  border: 2px solid lightblue;
+  padding-left: 45px;
+}
+
+.input-search-label {
+  position: relative;
+  color: lightblue;
+  font: 1rem Open-Sans italic;
+  &::before {
+    content: url('../../assets/svg/search-icon.svg');
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 33px;
+    left: 20px;
+  }
+}
