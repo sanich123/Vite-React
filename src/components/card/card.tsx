@@ -5,7 +5,6 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 
-
 export default class ItemCard extends React.Component<{ user: Omit<UsersType, 'id'> }> {
   render() {
     const { user: { name, username, email, address: { street, suite, city, zipcode }, phone },
