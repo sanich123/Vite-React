@@ -14,7 +14,7 @@ import { getValuesFromForm, resetInputs, validateInputsState } from './utils';
 import { FormState } from './types/form-types';
 import './forms.scss';
 
-export default class Forms extends Component<{}, FormState> {
+export default class Forms extends Component<Record<string, never>, FormState> {
   fileInput: RefObject<HTMLInputElement>;
   nameInput: RefObject<HTMLInputElement>;
   surnameInput: RefObject<HTMLInputElement>;
@@ -32,7 +32,7 @@ export default class Forms extends Component<{}, FormState> {
   emailEnabledInput: RefObject<HTMLInputElement>;
   smsEnabledInput: RefObject<HTMLInputElement>;
 
-  constructor(props: {}) {
+  constructor(props: Record<string, never>) {
     super(props);
     this.state = {
       data: [],
@@ -60,6 +60,7 @@ export default class Forms extends Component<{}, FormState> {
     this.emailEnabledInput = createRef();
     this.smsEnabledInput = createRef();
   }
+
   getInputs() {
     return {
       name: this.nameInput,
@@ -82,12 +83,13 @@ export default class Forms extends Component<{}, FormState> {
       img: this.fileInput,
     };
   }
+
   async handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const { target } = e;
     if (target instanceof HTMLFormElement) {
       const obj = getValuesFromForm(target, this.fileInput);
-      await this.setState({ data: [...this.state.data, obj] });
+      await this.setState((state) => ({ data: [...state.data, obj] }));
       applyToLocalStorage(LocalStorageKeys.formData, this.state.data);
       this.setState({ success: true });
       resetInputs(this.getInputs(), INITIAL_STATE);
@@ -95,29 +97,42 @@ export default class Forms extends Component<{}, FormState> {
       this.setState({ disabled: true, inputsState: INITIAL_STATE });
     }
   }
+
   setCheckboxes(checkbox: RefObject<HTMLInputElement>, name: string) {
     if (checkbox.current) {
-      checkbox.current.checked
-        ? this.setState({ inputsState: { ...this.state.inputsState, [name]: 'on' } })
-        : this.setState({ inputsState: { ...this.state.inputsState, [name]: 'off' } });
+      if (checkbox.current.checked) {
+        this.setState((state) => ({ inputsState: { ...state.inputsState, [name]: 'on' } }));
+      } else {
+        this.setState((state) => ({ inputsState: { ...state.inputsState, [name]: 'off' } }));
+      }
     }
   }
+
   setListener(input: RefObject<HTMLInputElement | HTMLSelectElement>) {
     if (input.current) {
       return input.current.addEventListener('change', ({ target }) => {
         if (target instanceof HTMLInputElement || target instanceof HTMLSelectElement) {
           const { value, name } = target;
-          if (name === InputKeys.subscribeEmail || name === InputKeys.subscribeSms)
-            this.setCheckboxes(this.getInputs()[name], name);
-          else this.setState({ inputsState: { ...this.state.inputsState, [name]: value } });
-          if (validateInputsState(this.state.inputsState)) this.setState({ disabled: false });
+          if (name === InputKeys.subscribeEmail || name === InputKeys.subscribeSms) {
+            {
+              this.setCheckboxes(this.getInputs()[name], name);
+            }
+          } else {
+            this.setState((state) => ({ inputsState: { ...state.inputsState, [name]: value } }));
+          }
+          if (validateInputsState(this.state.inputsState)) {
+            this.setState({ disabled: false });
+          }
         }
       });
     }
   }
+
   componentDidMount() {
     const savedData = getFromLocalStorage(LocalStorageKeys.formData);
-    if (savedData) this.setState({ data: savedData });
+    if (savedData) {
+      this.setState({ data: savedData });
+    }
     Object.values(this.getInputs()).map((input) => this.setListener(input));
   }
 

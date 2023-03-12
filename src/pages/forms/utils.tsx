@@ -1,11 +1,11 @@
-import React, { RefObject } from 'react';
+import { RefObject } from 'react';
 import { InputKeys } from 'src/utils/const/const';
 import { FormDataValues, InitialState, ObjOfRefs } from './types/form-types';
 
 export function getValuesFromForm(target: HTMLFormElement, fileInput: RefObject<HTMLInputElement>) {
   const formData = new FormData(target);
   const valuesFromForm: FormDataValues = {};
-  for (let [key, value] of formData) {
+  for (const [key, value] of formData) {
     valuesFromForm[key] = value;
   }
   if (fileInput.current) {
@@ -22,7 +22,7 @@ export function getValuesFromForm(target: HTMLFormElement, fileInput: RefObject<
 }
 
 export function resetInputs(inputs: ObjOfRefs, initialState: InitialState) {
-  for (let key in initialState) {
+  for (const key in initialState) {
     const input = inputs[key];
     if (input.current instanceof HTMLInputElement) {
       if (
@@ -42,7 +42,7 @@ export function resetInputs(inputs: ObjOfRefs, initialState: InitialState) {
 
 export function validateInputsState(state: FormDataValues) {
   const values = [];
-  for (let key in state) {
+  for (const key in state) {
     if (key !== InputKeys.subscribeEmail && key !== InputKeys.subscribeSms) {
       values.push(state[key]);
     }

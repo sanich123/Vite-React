@@ -7,26 +7,23 @@ export default class Cards extends Component<{ data: FormDataValues[] }> {
     return (
       <section className="cards">
         {this.props.data.map(
-          (
-            {
-              name,
-              surname,
-              city,
-              zipcode,
-              country,
-              sexuality,
-              gender,
-              img,
-              imgName,
-              birthday,
-              delivery,
-              time,
-              subscribeEmail,
-              subscribeSms,
-            },
-            i
-          ) => (
-            <div key={`${name}${surname}${i}`} className="cards__item item">
+          ({
+            name,
+            surname,
+            city,
+            zipcode,
+            country,
+            sexuality,
+            gender,
+            img,
+            imgName,
+            birthday,
+            delivery,
+            time,
+            subscribeEmail,
+            subscribeSms,
+          }) => (
+            <div key={`${name}${surname}`} className="cards__item item">
               <img
                 src={img.toString()}
                 alt={`${imgName}`}
@@ -50,14 +47,14 @@ export default class Cards extends Component<{ data: FormDataValues[] }> {
                 <span className="item__text">{`I'm: ${gender} and ${sexuality}`}</span>
               </div>
               <div className="item__email">
-                <span className="item__text">{`Send me emails: ${
-                  subscribeEmail === 'on' ? 'yes' : 'no'
-                }`}</span>
+                <span className="item__text">
+                  {`Send me emails: ${subscribeEmail === 'on' ? 'yes' : 'no'}`}
+                </span>
               </div>
               <div className="item__sms">
-                <span className="item__text">{`Send me sms: ${
-                  subscribeSms === 'on' ? 'yes' : 'no'
-                }`}</span>
+                <span className="item__text">
+                  {`Send me sms: ${subscribeSms === 'on' ? 'yes' : 'no'}`}
+                </span>
               </div>
             </div>
           )

@@ -24,9 +24,11 @@ export default class DateInputs extends Component<InputsRefsAsProps> {
                 ref={this.props.inputs[name]}
               />
               {!this.props.inputs[name].current?.value && (
-                <div className="warning">{`You must choose ${
-                  name === InputKeys.time ? 'time' : 'date'
-                }, to send the form. ${deliveryRequirings}${timeRequirings}`}</div>
+                <div className="warning">
+                  {`You must choose ${
+                    name === InputKeys.time ? 'time' : 'date'
+                  }, to send the form. ${deliveryRequirings}${timeRequirings}`}
+                </div>
               )}
             </div>
           );

@@ -7,17 +7,12 @@ import Card from './card';
 
 describe('Card', () => {
   it('should correctly render', () => {
-    const {id, ...rest} = MOCK_USERS[0];
-    render(<Card key={id} user={rest}/>);
+    const { id, ...rest } = MOCK_USERS[0];
+    render(<Card key={id} user={rest} />);
     const {
       username,
       email,
-      address: {
-        street,
-        suite,
-        city,
-        zipcode,
-      },
+      address: { street, suite, city, zipcode },
       phone,
     } = MOCK_USERS[0];
     expect(screen.getByText(new RegExp(`${username}`, 'i'))).toBeDefined();

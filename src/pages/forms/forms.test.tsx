@@ -1,10 +1,9 @@
-import React, { createRef, RefObject } from 'react';
+import React from 'react';
 import { describe, expect, it } from 'vitest';
 import { screen } from '../../tests/test-utils';
 import { render } from '@testing-library/react';
 import Forms from './forms';
 import { BrowserRouter } from 'react-router-dom';
-import { MOCK_DATA } from 'src/utils/mocks/mocks';
 import { COUNTRIES } from 'src/utils/const/texts';
 
 describe('Forms', () => {

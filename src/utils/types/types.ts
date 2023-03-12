@@ -1,5 +1,3 @@
-import React, { RefObject } from 'react';
-
 export interface UsersType {
   id: number;
   name: string;
@@ -23,5 +21,3 @@ export interface UsersType {
     bs: string;
   };
 }
-
-

@@ -4,7 +4,7 @@ import { CHECKBOXES_MOCKS } from 'src/utils/const/texts';
 export default class CheckboxesInputs extends Component<{
   emailEnabledInput: RefObject<HTMLInputElement>;
   smsEnabledInput: RefObject<HTMLInputElement>;
-  disabled: boolean
+  disabled: boolean;
 }> {
   render() {
     return (
@@ -24,7 +24,6 @@ export default class CheckboxesInputs extends Component<{
             </div>
           ))}
         </fieldset>
-
       </div>
     );
   }

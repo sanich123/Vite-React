@@ -20,6 +20,7 @@ export default class Main extends React.Component<{}, MainState> {
     this.state = { users: [], searchQuery: '' };
     this.handleChange = this.handleChange.bind(this);
   }
+
   async componentDidMount() {
     const response = await fetch(URL_USERS);
     const users = await response.json();

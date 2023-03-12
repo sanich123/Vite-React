@@ -6,6 +6,6 @@ import { vi } from 'vitest';
 const fetchMocker = createFetchMock(vi);
 fetchMocker.enableMocks();
 
-beforeAll(() => server.listen({ onUnhandledRequest: 'error' }))
-afterAll(() => server.close())
-afterEach(() => server.resetHandlers())
+beforeAll(() => server.listen({ onUnhandledRequest: 'error' }));
+afterAll(() => server.close());
+afterEach(() => server.resetHandlers());
