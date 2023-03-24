@@ -1,17 +1,17 @@
 import React, { Component, RefObject, createRef, FormEvent } from 'react';
 import Header from 'src/components/header/header';
-import DateInputs from './dates/date-inputs';
-import RadioInputs from './radio/radio-inputs';
-import Selects from './selects/selects';
-import TextInputs from './text-inputs/text-inputs';
-import CheckboxesInputs from './checkboxes/checkboxes';
-import FileInput from './files/file-input';
-import Cards from './cards/cards';
+import DateInputs from '../../components/dates/date-inputs';
+import RadioInputs from '../../components/radio/radio-inputs';
+import Selects from '../../components/selects/selects';
+import TextInputs from '../../components/text-inputs/text-inputs';
+import CheckboxesInputs from '../../components/checkboxes/checkboxes';
+import FileInput from '../../components/files/file-input';
+import Cards from '../../components/cards/cards';
 import { LocalStorageKeys, InputKeys } from 'src/utils/const/const';
 import { applyToLocalStorage, getFromLocalStorage } from 'src/utils/local-storage';
 import { INITIAL_STATE } from 'src/utils/const/texts';
-import { getValuesFromForm, resetInputs, validateInputsState } from './utils';
-import { FormState } from './types/form-types';
+import { getValuesFromForm, resetInputs, validateInputsState } from './form-utils';
+import { FormState } from '../../utils/types/form-types';
 import './forms.scss';
 
 export default class Forms extends Component<Record<string, never>, FormState> {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FormDataValues } from '../types/form-types';
+import { FormDataValues } from '../../utils/types/form-types';
 import './cards.scss';
 
 export default class Cards extends Component<{ data: FormDataValues[] }> {

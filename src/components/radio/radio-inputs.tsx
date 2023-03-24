@@ -1,6 +1,6 @@
 import React from 'react';
 import { RADIO_MOCKS } from 'src/utils/const/texts';
-import { InputsRefsAsProps } from '../types/form-types';
+import { InputsRefsAsProps } from '../../utils/types/form-types';
 
 export default class RadioInputs extends React.Component<InputsRefsAsProps> {
   render() {

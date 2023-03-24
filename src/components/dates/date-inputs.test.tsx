@@ -1,6 +1,6 @@
 import React, { createRef, RefObject } from 'react';
 import { describe, expect, it } from 'vitest';
-import { screen } from '../../../tests/test-utils';
+import { screen } from '../../tests/test-utils';
 import { render } from '@testing-library/react';
 import DateInputs from './date-inputs';
 
@@ -14,7 +14,13 @@ describe('DateInputs', () => {
     ['birthday', 'choose your delivery date', 'choose your delivery time'].map((text) =>
       expect(screen.getByLabelText(new RegExp(`${text}`, 'i'))).toBeDefined()
     );
-    expect(screen.getAllByText(/нужно выбрать дату, чтобы отправить форму/i)).toHaveLength(2);
-    expect(screen.getByText(/нужно выбрать время, чтобы отправить форму/i)).toBeDefined();
+    expect(
+      screen.getAllByText(
+        /You must choose date, to send the form. Date must be below 01 January 2024/i
+      )
+    ).toBeDefined();
+    expect(
+      screen.getByText(/You must choose time, to send the form. Time must be from 10 till 18/i)
+    ).toBeDefined();
   });
 });

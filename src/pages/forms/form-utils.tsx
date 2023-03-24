@@ -1,6 +1,6 @@
 import { RefObject } from 'react';
 import { InputKeys } from 'src/utils/const/const';
-import { FormDataValues, InitialState, ObjOfRefs } from './types/form-types';
+import { FormDataValues, InitialState, ObjOfRefs } from '../../utils/types/form-types';
 
 export function getValuesFromForm(target: HTMLFormElement, fileInput: RefObject<HTMLInputElement>) {
   const formData = new FormData(target);

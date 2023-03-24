@@ -1,8 +1,12 @@
 import React from 'react';
-import Header from 'src/components/header/header';
+import { Layout } from 'src/components/layout/layout';
 
 export default class AboutUs extends React.Component {
   render() {
-    return <Header />;
+    return (
+      <Layout>
+        <h1>Страница про нас</h1>
+      </Layout>
+    );
   }
 }

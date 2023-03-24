@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { InputKeys } from 'src/utils/const/const';
 import { DATE_MOCKS, Warnings } from 'src/utils/const/texts';
-import { InputsRefsAsProps } from '../types/form-types';
+import { InputsRefsAsProps } from '../../utils/types/form-types';
 
 export default class DateInputs extends Component<InputsRefsAsProps> {
   render() {

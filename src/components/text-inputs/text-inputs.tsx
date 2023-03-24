@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { INPUTS_TEXT_MOCKS, Warnings } from 'src/utils/const/texts';
-import { InputsRefsAsProps } from '../types/form-types';
+import { InputsRefsAsProps } from '../../utils/types/form-types';
 
 export default class TextInputs extends Component<InputsRefsAsProps> {
   render() {

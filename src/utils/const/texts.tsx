@@ -1,4 +1,4 @@
-import { InitialState } from 'src/pages/forms/types/form-types';
+import { InitialState } from 'src/utils/types/form-types';
 import { getFormattedDate } from '../date-utils';
 
 export const enum Warnings {

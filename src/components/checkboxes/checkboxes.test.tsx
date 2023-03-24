@@ -1,6 +1,6 @@
 import React, { createRef, RefObject } from 'react';
 import { describe, expect, it } from 'vitest';
-import { screen } from '../../../tests/test-utils';
+import { screen } from '../../tests/test-utils';
 import { render } from '@testing-library/react';
 import CheckboxesInputs from './checkboxes';
 

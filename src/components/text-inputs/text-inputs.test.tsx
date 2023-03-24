@@ -1,6 +1,6 @@
 import React, { createRef, RefObject } from 'react';
 import { describe, expect, it } from 'vitest';
-import { screen } from '../../../tests/test-utils';
+import { screen } from '../../tests/test-utils';
 import { render } from '@testing-library/react';
 import UserEvent from '@testing-library/user-event';
 import TextInputs from './text-inputs';
@@ -15,7 +15,7 @@ describe('Text-inputs', () => {
       expect(screen.getByLabelText(new RegExp(`${word}`, 'i'))).toBeDefined();
     });
     expect(screen.getAllByRole('textbox')).toHaveLength(3);
-    expect(screen.getAllByText(/здесь не должно быть пустое поле/i)).toHaveLength(3);
+    expect(screen.getAllByText(/This field should not be empty/i)).toHaveLength(3);
   });
   it('should interact with the user', async () => {
     render(<TextInputs inputs={{ name: ref1, surname: ref2, zipcode: ref3 }} />);
