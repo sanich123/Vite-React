@@ -653,14 +653,26 @@ export const CITIES = [
 ];
 
 export const INPUTS_TEXT_MOCKS = [
-  { name: 'name', placeholder: 'Enter your name' },
+  {
+    name: 'name',
+    placeholder: 'Enter your name',
+    pattern: '[A-Z][\\w]{1,}',
+    type: 'text',
+    title: 'You are allowed to begin your name only from the capital letter',
+  },
   {
     name: 'surname',
+    type: 'text',
     placeholder: 'Enter your surname',
+    pattern: '[A-Z][\\w]{1,}',
+    title: 'You are allowed to begin your surname only from the capital letter',
   },
   {
     name: 'zipcode',
+    type: 'number',
     placeholder: 'Where are you from',
+    pattern: '',
+    title: 'You are allowed to type only numbers in this field',
   },
 ];
 

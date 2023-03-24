@@ -176,7 +176,7 @@ export default class Forms extends Component<Record<string, never>, FormState> {
             smsEnabledInput={this.smsEnabledInput}
             disabled={this.state.disabled}
           />
-          <button type="submit" disabled={this.state.disabled} className="submit-btn">
+          <button type="submit" className="submit-btn">
             Submit
           </button>
           {this.state.success && (
