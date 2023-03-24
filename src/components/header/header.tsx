@@ -1,10 +1,9 @@
-import { Grid } from '@mui/material';
-import React from 'react';
+import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import { RoutesNames, Routes, ROUTES } from 'src/utils/const/const';
 import styles from '../header/header.module.scss';
 
-export default class Header extends React.Component {
+export default class Header extends Component {
   render() {
     const { header, header__nav, header__ul, active, notActive } = styles;
 

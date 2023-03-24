@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from 'react';
+import React, { ChangeEvent, Component } from 'react';
 import Header from 'src/components/header/header';
 import { UsersType } from 'src/utils/types/types';
 import Loader from 'src/components/loader/loader';
@@ -6,16 +6,16 @@ import Card from 'src/components/card/card';
 import { LocalStorageKeys, URL_USERS } from 'src/utils/const/const';
 import { applyToLocalStorage, getFromLocalStorage } from 'src/utils/local-storage';
 import '../../styles/entry.scss';
-import styles from './main.module.scss';
-import { Grid, TextField } from '@mui/material';
+import './main.scss';
+import InputSearch from 'src/components/search/input-search';
 
 interface MainState {
   users: UsersType[];
   searchQuery: string;
 }
 
-export default class Main extends React.Component<{}, MainState> {
-  constructor(props: {}) {
+export default class Main extends Component<Record<string, never>, MainState> {
+  constructor(props: Record<string, never>) {
     super(props);
     this.state = { users: [], searchQuery: '' };
     this.handleChange = this.handleChange.bind(this);
@@ -36,31 +36,22 @@ export default class Main extends React.Component<{}, MainState> {
   }
 
   render() {
-    const { page__body } = styles;
     return (
-      <div className={page__body}>
+      <div className="page__body">
         <Header />
-        <TextField
-          variant="outlined"
-          label="Find something"
-          inputProps={{ inputMode: 'search', placeholder: 'Type search words' }}
-          onChange={this.handleChange}
-          value={this.state.searchQuery}
-          fullWidth
-          helperText="Type words and you'll find!"
-        />
+        <InputSearch handleChange={this.handleChange} searchQuery={this.state.searchQuery} />
+
         {this.state.users.length === 0 && <Loader />}
-        <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-          {this.state.users.length &&
-            this.state.users.map(
+        {this.state.users.length > 0 && (
+          <section className="cards">
+            {this.state.users.map(
               ({ id, ...rest }) =>
                 JSON.stringify(rest).includes(this.state.searchQuery) && (
-                  <Grid item xs={3} key={id}>
-                    <Card key={id} user={rest} />
-                  </Grid>
+                  <Card key={id} user={rest} />
                 )
             )}
-        </Grid>
+          </section>
+        )}
       </div>
     );
   }

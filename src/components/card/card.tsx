@@ -1,11 +1,8 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { UsersType } from 'src/utils/types/types';
-import Box from '@mui/material/Box';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import Typography from '@mui/material/Typography';
+import './card.scss';
 
-export default class ItemCard extends React.Component<{ user: Omit<UsersType, 'id'> }> {
+export default class ItemCard extends Component<{ user: Omit<UsersType, 'id'> }> {
   render() {
     const {
       user: {
@@ -18,38 +15,19 @@ export default class ItemCard extends React.Component<{ user: Omit<UsersType, 'i
     } = this.props;
 
     return (
-      <Box sx={{ minWidth: 275 }}>
-        <Card variant="outlined">
-          <CardContent>
-            <Typography variant="h5" component="div">
-              {`User: ${name} aka ${username}`}
-            </Typography>
-            <Typography variant="h5" component="div">
-              {}
-            </Typography>
-            <Typography sx={{ mb: 1.5 }} color="text.secondary">
-              {`Phone: ${phone}, Email: ${email}`}
-            </Typography>
-            <Typography variant="body2">
-              {'Address'}
-              <br />
-              {street}
-            </Typography>
-            <Typography variant="h5" component="div">
-              {name}
-            </Typography>
-            <Typography variant="h5" component="div">
-              {suite}
-            </Typography>
-            <Typography variant="h5" component="div">
-              {city}
-            </Typography>
-            <Typography variant="h5" component="div">
-              {zipcode}
-            </Typography>
-          </CardContent>
-        </Card>
-      </Box>
+      <div className="user__card card">
+        <div className="card__name">{name}</div>
+        <div className="card__username">{username}</div>
+        <div className="card__email">{email}</div>
+        <div className="card__address">
+          <div className="card__address--city">{`City: ${city}`}</div>
+          <div className="card__address--street">{`Street: ${street}`}</div>
+          <div className="card__address--suite">{`Flat: ${suite}`}</div>
+
+          <div className="card__address--zipcode">{`Zipcode: ${zipcode}`}</div>
+        </div>
+        <div className="card__phone">{`Phone: ${phone}`}</div>
+      </div>
     );
   }
 }
