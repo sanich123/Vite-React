@@ -1,4 +1,4 @@
-import React, { Component, ChangeEvent } from 'react';
+import React, { ChangeEvent } from 'react';
 import './input-search.scss';
 
 type InputSearchProps = {
@@ -6,22 +6,20 @@ type InputSearchProps = {
   searchQuery: string;
 };
 
-export default class InputSearch extends Component<InputSearchProps> {
-  render() {
-    return (
-      <div className="inputs-search-wrapper">
-        <label htmlFor="search-input" className="input-search-label">
-          Try to find something
-        </label>
-        <input
-          type="search"
-          id="search-input"
-          className="input-search"
-          placeholder="Type here to search something"
-          onChange={this.props.handleChange}
-          value={this.props.searchQuery}
-        />
-      </div>
-    );
-  }
+export default function InputSearch({ handleChange, searchQuery }: InputSearchProps) {
+  return (
+    <div className="inputs-search-wrapper">
+      <label htmlFor="search-input" className="input-search-label">
+        Try to find something
+      </label>
+      <input
+        type="search"
+        id="search-input"
+        className="input-search"
+        placeholder="Type here to search something"
+        onChange={handleChange}
+        value={searchQuery}
+      />
+    </div>
+  );
 }
