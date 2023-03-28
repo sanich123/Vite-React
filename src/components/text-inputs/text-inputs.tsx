@@ -9,7 +9,7 @@ export default function TextInputs({ register, errors }: InputRegisterType) {
         <div key={`${name}${placeholder}`} className={`input__wrapper input-${name}`}>
           <label htmlFor={`input-${name}`}>{`${name[0].toUpperCase()}${name.slice(1)}`}</label>
           <input
-            {...register(name, { required: true, minLength: 5 })}
+            {...register(name, { required: true, pattern: /[A-Z][\w]{1,}/, minLength: 5 })}
             type={type}
             name={`${name}`}
             id={`input-${name}`}
@@ -17,9 +17,10 @@ export default function TextInputs({ register, errors }: InputRegisterType) {
             placeholder={placeholder}
             className="input__text"
           />
-          {errors[name] && (
+          {errors && errors[name] && (
             <span className="errors-span">
-              This field is required and must be more than 5 symbols
+              Required field, the first letter must be capital and the length must be more than 4
+              symbols
             </span>
           )}
         </div>

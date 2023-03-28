@@ -645,7 +645,7 @@ export const INPUTS_TEXT_MOCKS = [
   },
   {
     name: 'zipcode',
-    type: 'number',
+    type: 'text',
     placeholder: 'Where are you from',
     pattern: '',
     title: 'You are allowed to type only numbers in this field',
