@@ -6,7 +6,7 @@ import FileInput from './file-input';
 
 describe('FileInput', () => {
   it('should render correctly', () => {
-    render(<FileInput register={vi.fn()} />);
+    render(<FileInput register={vi.fn()} errors={{ errors: {} }} />);
     expect(screen.getByLabelText(/send your photo/i)).toBeDefined();
   });
 });

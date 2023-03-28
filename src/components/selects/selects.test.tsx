@@ -7,7 +7,7 @@ import { COUNTRIES } from 'src/utils/const/texts';
 
 describe('Selects', () => {
   it('should correctly render', () => {
-    render(<Selects register={vi.fn()} />);
+    render(<Selects register={vi.fn()} errors={{ errors: {} }} />);
     COUNTRIES.slice(0, 30).map((country) => {
       expect(screen.getByText(new RegExp(`${country}`, 'i'))).toBeDefined();
     });

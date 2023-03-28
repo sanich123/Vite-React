@@ -247,6 +247,7 @@ export const MOCK_DATA = [
     subscribeSms: 'on',
     img: 'blob:http://127.0.0.1:5173/1e9bd057-0ce6-488d-a495-208052b9eed2',
     imgName: 'Снимок экрана 2022-04-13 210258.png',
+    checkboxes: ['email', 'sms'],
   },
   {
     name: 'Alexander',
@@ -263,6 +264,7 @@ export const MOCK_DATA = [
     subscribeSms: 'on',
     img: 'blob:http://127.0.0.1:5173/778bab19-60c6-4f94-8dcd-935d9a7c91ba',
     imgName: '№6-18.png',
+    checkboxes: ['email', 'sms'],
   },
   {
     name: 'eee',
@@ -279,6 +281,7 @@ export const MOCK_DATA = [
     subscribeSms: 'on',
     img: 'blob:http://127.0.0.1:5173/f8138bd6-47c5-4e04-b07d-3f737c4e5042',
     imgName: 'Снимок экрана 2022-04-13 210258.png',
+    checkboxes: ['email', 'sms'],
   },
   {
     name: 'vb',
@@ -295,5 +298,6 @@ export const MOCK_DATA = [
     subscribeSms: 'on',
     img: 'blob:http://127.0.0.1:5173/e7e6c19b-c1c2-4904-8c91-ee8ac3b66140',
     imgName: '№6-18.png',
+    checkboxes: ['email', 'sms'],
   },
 ];
