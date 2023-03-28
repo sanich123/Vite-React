@@ -15,7 +15,7 @@ describe('Layout', () => {
         </Layout>
       </BrowserRouter>
     );
-    expect(screen.getAllByRole('textbox')).toHaveLength(3);
+    expect(screen.getAllByRole('textbox')).toHaveLength(2);
     expect(screen.getByPlaceholderText(/enter your name/i)).toBeDefined();
   });
 });

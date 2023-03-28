@@ -3,6 +3,8 @@ import { FieldValues } from 'react-hook-form';
 import './cards.scss';
 
 export default function Cards({ formData }: { formData: FieldValues[] }) {
+  const [{ img: urlImg }] = formData;
+  const imgUrl = URL.createObjectURL(urlImg[0]);
   return (
     <section className="cards">
       {formData.map(
@@ -14,7 +16,6 @@ export default function Cards({ formData }: { formData: FieldValues[] }) {
           country,
           sexuality,
           gender,
-          img,
           birthday,
           delivery,
           time,
@@ -23,8 +24,8 @@ export default function Cards({ formData }: { formData: FieldValues[] }) {
         }) => (
           <div key={`${name}${surname}`} className="cards__item item">
             <img
-              src={URL.createObjectURL(img[0])}
-              alt={`${img[0].name}`}
+              src={imgUrl}
+              alt={`${urlImg[0].name}`}
               width="150px"
               height="150px"
               className="item__img"
