@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Layout } from 'src/components/layout/layout';
 import { UsersType } from 'src/utils/types/types';
 import Loader from 'src/components/loader/loader';
@@ -13,8 +13,12 @@ import './main.scss';
 export default function Main() {
   const [users, setUsers] = useState<UsersType[]>([]);
   const [error, setError] = useState<boolean>(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const { register, handleSubmit } = useForm();
+
+  useEffect(() => {
+    fetchUsers(setUsers, '');
+  }, []);
 
   async function onSubmit({ search }: FormDataValues) {
     try {
@@ -34,6 +38,7 @@ export default function Main() {
           {Messages.searchLabel}
         </label>
         <input {...register('search')} type="search" id="search-input" className="input-search" placeholder={Messages.searchPlaceholder} />
+        <button type="submit">Search</button>
       </form>
       {isLoading && <Loader />}
       {error && <h1>{Messages.didError}</h1>}

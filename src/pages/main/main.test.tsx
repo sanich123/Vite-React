@@ -5,6 +5,7 @@ import { render } from '@testing-library/react';
 import { screen } from '../../tests/test-utils';
 import { BrowserRouter } from 'react-router-dom';
 import { MOCK_USERS } from 'src/utils/mocks/mocks';
+import UserEvent from '@testing-library/user-event';
 
 describe('App', () => {
   it('should render correctly', async () => {
@@ -46,5 +47,18 @@ describe('App', () => {
         expect(await screen.findByText(new RegExp(`${catchPhrase}`, 'i'))).toBeDefined();
       }
     );
+  });
+  it('should interract with the user', async () => {
+    render(
+      <BrowserRouter>
+        <Main />
+      </BrowserRouter>
+    );
+    const search = screen.getByLabelText(/try to find something/i);
+    const searchBtn = screen.getByRole('button');
+    await UserEvent.type(search, 'превед');
+    expect(await screen.findByDisplayValue('превед')).toBeDefined();
+    await UserEvent.click(searchBtn);
+    await screen.debug();
   });
 });
