@@ -1,37 +1,50 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Layout } from 'src/components/layout/layout';
 import { UsersType } from 'src/utils/types/types';
-import InputSearch from 'src/components/search/input-search';
 import Loader from 'src/components/loader/loader';
 import Card from 'src/components/card/card';
-import { LocalStorageKeys } from 'src/utils/const/const';
-import { applyToLocalStorage, getFromLocalStorage } from 'src/utils/local-storage';
+import { fetchUsers } from 'src/utils/async/async-functions';
+import { useForm } from 'react-hook-form';
+import { FormDataValues } from 'src/utils/types/form-types';
+import { Messages } from 'src/utils/const/const';
 import '../../styles/entry.scss';
 import './main.scss';
-import { fetchUsers } from 'src/utils/async/async-functions';
 
 export default function Main() {
   const [users, setUsers] = useState<UsersType[]>([]);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [error, setError] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const { register, handleSubmit } = useForm();
 
-  useEffect(() => {
-    fetchUsers(setUsers);
-    if (getFromLocalStorage(LocalStorageKeys.searchValue).length > 0) {
-      setSearchQuery(getFromLocalStorage(LocalStorageKeys.searchValue));
+  async function onSubmit({ search }: FormDataValues) {
+    try {
+      setIsLoading(true);
+      await fetchUsers(setUsers, search);
+      setIsLoading(false);
+    } catch {
+      setIsLoading(false);
+      setError(true);
     }
-  }, []);
+  }
 
   return (
     <Layout>
-      <InputSearch
-        handleChange={({ target: { value } }) => {
-          setSearchQuery(value);
-          applyToLocalStorage(LocalStorageKeys.searchValue, value);
-        }}
-        searchQuery={searchQuery}
-      />
-      {users.length === 0 && <Loader />}
-      {users.length > 0 && <section className="cards">{users.map(({ id, ...rest }) => JSON.stringify(rest).includes(searchQuery) && <Card key={id} user={rest} />)}</section>}
+      <form className="inputs-search-wrapper" onSubmit={handleSubmit(onSubmit)}>
+        <label htmlFor="search-input" className="input-search-label">
+          {Messages.searchLabel}
+        </label>
+        <input {...register('search')} type="search" id="search-input" className="input-search" placeholder={Messages.searchPlaceholder} />
+      </form>
+      {isLoading && <Loader />}
+      {error && <h1>{Messages.didError}</h1>}
+      {users.length === 0 && <h1>{Messages.didntFind}</h1>}
+      {users.length > 0 && (
+        <section className="cards">
+          {users.map(({ id, ...rest }) => (
+            <Card key={id} user={rest} />
+          ))}
+        </section>
+      )}
     </Layout>
   );
 }
