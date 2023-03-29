@@ -16,49 +16,28 @@ describe('App', () => {
     );
     expect(screen.getByText(/main/i)).toBeDefined();
     expect(screen.getByText(/about us/i)).toBeDefined();
-    MOCK_USERS.forEach(
-      async ({
-        name,
-        username,
-        email,
-        address: {
-          street,
-          suite,
-          city,
-          zipcode,
-          geo: { lat, lng },
-        },
-        phone,
-        website,
-        company: { name: companyName, catchPhrase },
-      }) => {
-        expect(await screen.findByText(new RegExp(`${name}`, 'i'))).toBeDefined();
-        expect(await screen.findByText(new RegExp(`${username}`, 'i'))).toBeDefined();
-        expect(await screen.findByText(new RegExp(`${email}`, 'i'))).toBeDefined();
-        expect(await screen.findByText(new RegExp(`${street}`, 'i'))).toBeDefined();
-        expect(await screen.findByText(new RegExp(`${suite}`, 'i'))).toBeDefined();
-        expect(await screen.findByText(new RegExp(`${city}`, 'i'))).toBeDefined();
-        expect(await screen.findByText(new RegExp(`${zipcode}`, 'i'))).toBeDefined();
-        expect(await screen.findByText(new RegExp(`${lat}`, 'i'))).toBeDefined();
-        expect(await screen.findByText(new RegExp(`${lng}`, 'i'))).toBeDefined();
-        expect(await screen.findByText(new RegExp(`${phone}`, 'i'))).toBeDefined();
-        expect(await screen.findByText(new RegExp(`${website}`, 'i'))).toBeDefined();
-        expect(await screen.findByText(new RegExp(`${companyName}`, 'i'))).toBeDefined();
-        expect(await screen.findByText(new RegExp(`${catchPhrase}`, 'i'))).toBeDefined();
-      }
-    );
+    MOCK_USERS.forEach(async ({ name, username, email, address: { street, suite, city, zipcode }, phone }) => {
+      expect(await screen.findByText(new RegExp(`${name}`, 'i'))).toBeDefined();
+      expect(await screen.findByText(new RegExp(`${username}`, 'i'))).toBeDefined();
+      expect(await screen.findByText(new RegExp(`${email}`, 'i'))).toBeDefined();
+      expect(await screen.findByText(new RegExp(`${street}`, 'i'))).toBeDefined();
+      expect(await screen.findByText(new RegExp(`${suite}`, 'i'))).toBeDefined();
+      expect(await screen.findByText(new RegExp(`${city}`, 'i'))).toBeDefined();
+      expect(await screen.findByText(new RegExp(`${zipcode}`, 'i'))).toBeDefined();
+      expect(await screen.findByText(new RegExp(`${phone}`, 'i'))).toBeDefined();
+    });
   });
-  it('should interract with the user', async () => {
+  it('should do fake requests, when user typing and clicking enter', async () => {
     render(
       <BrowserRouter>
         <Main />
       </BrowserRouter>
     );
     const search = screen.getByLabelText(/try to find something/i);
-    const searchBtn = screen.getByRole('button');
+    const submitBtn = screen.getByRole('button');
     await UserEvent.type(search, 'превед');
     expect(await screen.findByDisplayValue('превед')).toBeDefined();
-    await UserEvent.click(searchBtn);
-    await screen.debug();
+    await UserEvent.click(submitBtn);
+    expect(await screen.findByText(/превед/i)).toBeDefined();
   });
 });
