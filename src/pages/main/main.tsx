@@ -31,14 +31,7 @@ export default function Main() {
         searchQuery={searchQuery}
       />
       {users.length === 0 && <Loader />}
-      {users.length > 0 && (
-        <section className="cards">
-          {users.map(
-            ({ id, ...rest }) =>
-              JSON.stringify(rest).includes(searchQuery) && <Card key={id} user={rest} />
-          )}
-        </section>
-      )}
+      {users.length > 0 && <section className="cards">{users.map(({ id, ...rest }) => JSON.stringify(rest).includes(searchQuery) && <Card key={id} user={rest} />)}</section>}
     </Layout>
   );
 }

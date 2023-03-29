@@ -8,8 +8,7 @@ describe('RadioInputs', () => {
   it('should correctly render', () => {
     render(<RadioInputs register={vi.fn()} errors={{ errors: {} }} />);
     expect(screen.getAllByRole('radio')).toHaveLength(5);
-    ['homosexual', 'lesbian', 'female', 'hetero'].map((value) =>
-      expect(screen.getByLabelText(new RegExp(`${value}`))).toBeDefined()
-    );
+    ['homosexual', 'lesbian', 'female', 'hetero'].map((value) => expect(screen.getByLabelText(new RegExp(`${value}`))).toBeDefined());
+    expect(screen.getByRole('group')).toBeDefined();
   });
 });

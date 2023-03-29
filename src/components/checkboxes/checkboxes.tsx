@@ -9,13 +9,7 @@ export default function CheckboxesInputs({ register }: Pick<InputRegisterType, '
         <legend>Choose your subscribe</legend>
         {CHECKBOXES_MOCKS.map(({ name, text, value }) => (
           <div key={`${name}${text}`} className="checkbox__wrapper">
-            <input
-              {...register(name)}
-              type="checkbox"
-              name={name}
-              id={`checkbox-subscribe-${name}`}
-              value={value}
-            />
+            <input {...register(name)} type="checkbox" name={name} id={`checkbox-subscribe-${name}`} value={value} />
             <label htmlFor={`checkbox-subscribe-${name}`}>{text}</label>
           </div>
         ))}

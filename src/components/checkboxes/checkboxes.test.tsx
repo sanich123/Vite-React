@@ -6,9 +6,9 @@ import CheckboxesInputs from './checkboxes';
 describe('Checkboxes', () => {
   it('should render correctly', () => {
     render(<CheckboxesInputs register={vi.fn()} />);
-    ['send me emails', 'send me sms'].map((text) =>
-      expect(screen.getByLabelText(new RegExp(`${text}`, 'i'))).toBeDefined()
-    );
+    ['send me emails', 'send me sms'].map((text) => expect(screen.getByLabelText(new RegExp(`${text}`, 'i'))).toBeDefined());
     expect(screen.getAllByRole('checkbox')).toHaveLength(2);
+    expect(screen.getByRole('group')).toBeDefined();
+    expect(screen.getByText(/choose your subscribe/i)).toBeDefined();
   });
 });

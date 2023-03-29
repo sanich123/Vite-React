@@ -12,14 +12,7 @@ export default function InputSearch({ handleChange, searchQuery }: InputSearchPr
       <label htmlFor="search-input" className="input-search-label">
         Try to find something
       </label>
-      <input
-        type="search"
-        id="search-input"
-        className="input-search"
-        placeholder="Type here to search something"
-        onChange={handleChange}
-        value={searchQuery}
-      />
+      <input type="search" id="search-input" className="input-search" placeholder="Type here to search something" onChange={handleChange} value={searchQuery} />
     </div>
   );
 }

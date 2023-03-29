@@ -7,20 +7,10 @@ export default function RadioInputs({ register, errors }: InputRegisterType) {
     <div className="input__wrapper input-radios">
       <fieldset>
         <legend>Choose your gender and sexuality</legend>
-        {(errors['gender'] || errors['sexuality']) && (
-          <span className="errors-span">
-            This fields are required, you must choose your gender and sexuality
-          </span>
-        )}
+        {(errors['gender'] || errors['sexuality']) && <span className="errors-span">This fields are required, you must choose your gender and sexuality</span>}
         {RADIO_MOCKS.map(({ type, name, value }) => (
           <div key={`${value}`} className="radio__wrapper">
-            <input
-              {...register(name, { required: true })}
-              type={type}
-              name={name}
-              id={`radio-${value}`}
-              value={value}
-            />
+            <input {...register(name, { required: true })} type={type} name={name} id={`radio-${value}`} value={value} />
             <label htmlFor={`radio-${value}`}>{`I'm ${value}`}</label>
           </div>
         ))}
