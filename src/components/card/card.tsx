@@ -1,32 +1,29 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { UsersType } from 'src/utils/types/types';
 import './card.scss';
 
-export default class ItemCard extends Component<{ user: Omit<UsersType, 'id'> }> {
-  render() {
-    const {
-      user: {
-        name,
-        username,
-        email,
-        address: { street, suite, city, zipcode },
-        phone,
-      },
-    } = this.props;
+interface ItemCardProps {
+  user: UsersType;
+  setIsShowMore: (arg: boolean) => void;
+  getIdUser: (arg: string) => void;
+}
 
-    return (
-      <div className="user__card card">
-        <div className="card__name">{name}</div>
-        <div className="card__username">{username}</div>
-        <div className="card__email">{email}</div>
-        <div className="card__address">
-          <div className="card__address--city">{`City: ${city}`}</div>
-          <div className="card__address--street">{`Street: ${street}`}</div>
-          <div className="card__address--suite">{`Flat: ${suite}`}</div>
-          <div className="card__address--zipcode">{`Zipcode: ${zipcode}`}</div>
-        </div>
-        <div className="card__phone">{`Phone: ${phone}`}</div>
-      </div>
-    );
-  }
+export default function ItemCard({ user, setIsShowMore, getIdUser }: ItemCardProps) {
+  const { id, name, username } = user;
+
+  return (
+    <div className="user__card card">
+      <div className="card__name">{name}</div>
+      <div className="card__username">{username}</div>
+      <button
+        type="button"
+        onClick={() => {
+          setIsShowMore(true);
+          getIdUser(id.toString());
+        }}
+      >
+        Show more
+      </button>
+    </div>
+  );
 }
