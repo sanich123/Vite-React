@@ -1,18 +1,16 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { fetchUsers } from 'src/utils/async/async-functions';
+import { FetchUsersProps, fetchUsers } from 'src/utils/async/async-functions';
 import { Messages } from 'src/utils/const/const';
+import { errorHandler } from 'src/utils/errors/errors';
 import { FormDataValues } from 'src/utils/types/form-types';
-import { UsersType } from 'src/utils/types/types';
 import './input-search.scss';
 
 type FormSearchProps = {
   setIsLoading: (arg: boolean) => void;
-  setError: (arg: { [key: string]: string }) => void;
-  setUsers: (arg: UsersType[]) => void;
 };
 
-export default function InputSearch({ setIsLoading, setError, setUsers }: FormSearchProps) {
+export default function InputSearch({ setIsLoading, setError, setUsers }: Pick<FetchUsersProps, 'setError' | 'setUsers'> & FormSearchProps) {
   const { register, handleSubmit } = useForm();
 
   async function onSubmit({ search }: FormDataValues) {
@@ -23,9 +21,7 @@ export default function InputSearch({ setIsLoading, setError, setUsers }: FormSe
         setIsLoading(false);
       } catch (err) {
         setIsLoading(false);
-        if (err instanceof Error) {
-          setError({ message: err.message });
-        }
+        errorHandler({ err, stateErrorHandler: setError });
       }
     }
   }

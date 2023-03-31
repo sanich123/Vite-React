@@ -18,5 +18,9 @@ describe('Forms', () => {
       expect(screen.getByText(new RegExp(`${country}`, 'i'))).toBeDefined();
     });
     ['homosexual', 'lesbian', 'female', 'hetero'].map((value) => expect(screen.getByLabelText(new RegExp(`${value}`))).toBeDefined());
+    expect(screen.getAllByRole('textbox')).toHaveLength(3);
+    expect(screen.getAllByRole('checkbox')).toHaveLength(2);
+    expect(screen.getAllByRole('radio')).toHaveLength(5);
+    expect(screen.getAllByRole('combobox')).toHaveLength(2);
   });
 });

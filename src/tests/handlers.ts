@@ -5,6 +5,9 @@ import { MOCK_USERS } from 'src/utils/mocks/mocks';
 export const handlers = [
   rest.get(`${URL_USERS}`, (req, res, ctx) => {
     const name = req.url.searchParams.get('q');
+    if (name === 'errorPath') {
+      return res(ctx.status(403), ctx.json({ message: 'Some error occured' }));
+    }
     if (name) {
       return res(
         ctx.status(200),

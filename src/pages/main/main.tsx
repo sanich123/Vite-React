@@ -21,10 +21,14 @@ export default function Main() {
     <Layout>
       <InputSearch setIsLoading={setIsLoading} setUsers={setUsers} setError={setError} />
       {isLoading && <Loader />}
+
       {error.message && <h1>{error.message}</h1>}
+
       {users.length === 0 && <h1>{Messages.didntFind}</h1>}
+
       {isShowMore && <Modal users={users} idUser={idUser} setIsShowMore={setIsShowMore} />}
-      <section className="cards">{!isShowMore && users.map((user) => <Card key={user.id} user={user} setIsShowMore={setIsShowMore} getIdUser={getIdUser} />)}</section>
+
+      <section className="cards">{!isLoading && !isShowMore && users.map((user) => <Card key={user.id} user={user} setIsShowMore={setIsShowMore} getIdUser={getIdUser} />)}</section>
     </Layout>
   );
 }

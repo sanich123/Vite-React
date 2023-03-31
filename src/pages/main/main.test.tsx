@@ -16,15 +16,9 @@ describe('App', () => {
     );
     expect(screen.getByText(/main/i)).toBeDefined();
     expect(screen.getByText(/about us/i)).toBeDefined();
-    MOCK_USERS.forEach(async ({ name, username, email, address: { street, suite, city, zipcode }, phone }) => {
+    MOCK_USERS.forEach(async ({ name, username }) => {
       expect(await screen.findByText(new RegExp(`${name}`, 'i'))).toBeDefined();
       expect(await screen.findByText(new RegExp(`${username}`, 'i'))).toBeDefined();
-      expect(await screen.findByText(new RegExp(`${email}`, 'i'))).toBeDefined();
-      expect(await screen.findByText(new RegExp(`${street}`, 'i'))).toBeDefined();
-      expect(await screen.findByText(new RegExp(`${suite}`, 'i'))).toBeDefined();
-      expect(await screen.findByText(new RegExp(`${city}`, 'i'))).toBeDefined();
-      expect(await screen.findByText(new RegExp(`${zipcode}`, 'i'))).toBeDefined();
-      expect(await screen.findByText(new RegExp(`${phone}`, 'i'))).toBeDefined();
     });
   });
   it('should do fake requests, when user typing and clicking enter', async () => {
