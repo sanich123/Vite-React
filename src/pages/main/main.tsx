@@ -12,24 +12,16 @@ import { fetchUsers } from 'src/utils/async/async-functions';
 
 export default function Main() {
   const [users, setUsers] = useState<UsersType[]>([]);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState(getFromLocalStorage(LocalStorageKeys.searchValue));
 
   useEffect(() => {
     fetchUsers(setUsers);
-    if (getFromLocalStorage(LocalStorageKeys.searchValue).length > 0) {
-      setSearchQuery(getFromLocalStorage(LocalStorageKeys.searchValue));
-    }
-  }, []);
+    return () => applyToLocalStorage(LocalStorageKeys.searchValue, searchQuery);
+  }, [setUsers, searchQuery]);
 
   return (
     <Layout>
-      <InputSearch
-        handleChange={({ target: { value } }) => {
-          setSearchQuery(value);
-          applyToLocalStorage(LocalStorageKeys.searchValue, value);
-        }}
-        searchQuery={searchQuery}
-      />
+      <InputSearch handleChange={({ target: { value } }) => setSearchQuery(value)} searchQuery={searchQuery} />
       {users.length === 0 && <Loader />}
       {users.length > 0 && <section className="cards">{users.map(({ id, ...rest }) => JSON.stringify(rest).includes(searchQuery) && <Card key={id} user={rest} />)}</section>}
     </Layout>

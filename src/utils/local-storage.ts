@@ -1,6 +1,6 @@
 import { FieldValues } from 'react-hook-form';
 
-export function applyToLocalStorage(key: string, data: FieldValues[]) {
+export function applyToLocalStorage(key: string, data: FieldValues[] | string) {
   localStorage.setItem(key, JSON.stringify(data));
 }
 
