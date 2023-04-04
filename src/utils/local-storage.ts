@@ -5,5 +5,5 @@ export function applyToLocalStorage(key: string, data: FieldValues[] | string) {
 }
 
 export function getFromLocalStorage(key: string) {
-  return JSON.parse(localStorage.getItem(key) || '[]');
+  return JSON.parse(localStorage.getItem(key) || '');
 }
