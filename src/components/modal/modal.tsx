@@ -12,13 +12,7 @@ interface ModalProps {
 }
 
 export default function Modal({ users, idUser, setIsShowMore }: ModalProps) {
-  const [
-    {
-      email,
-      address: { city, street, suite, zipcode },
-      phone,
-    },
-  ] = users.filter(({ id }) => id === Number(idUser));
+  const [{ email, address: { city, street, suite, zipcode }, phone }] = users.filter(({ id }) => id === Number(idUser));
   const { overlay, modal } = styles;
 
   useEffect(() => {

@@ -1,17 +1,22 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { FetchUsersProps, fetchUsers } from 'src/utils/async/async-functions';
-import { Messages } from 'src/utils/const/const';
+import { LocalStorageKeys, Messages } from 'src/utils/const/const';
 import { errorHandler } from 'src/utils/errors/errors';
 import { FormDataValues } from 'src/utils/types/form-types';
 import './input-search.scss';
+import { applyToLocalStorage, getFromLocalStorage } from 'src/utils/local-storage';
 
 type FormSearchProps = {
   setIsLoading: (arg: boolean) => void;
 };
 
 export default function InputSearch({ setIsLoading, setError, setUsers }: Pick<FetchUsersProps, 'setError' | 'setUsers'> & FormSearchProps) {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit } = useForm({
+    defaultValues: {
+      search: getFromLocalStorage(LocalStorageKeys.searchValue),
+    },
+  });
 
   async function onSubmit({ search }: FormDataValues) {
     if (typeof search === 'string') {
@@ -31,7 +36,14 @@ export default function InputSearch({ setIsLoading, setError, setUsers }: Pick<F
       <label htmlFor="search-input" className="input-search-label">
         {Messages.searchLabel}
       </label>
-      <input {...register('search')} type="search" id="search-input" className="input-search" placeholder={Messages.searchPlaceholder} />
+      <input
+        {...register('search')}
+        onChange={({ target: { value } }) => applyToLocalStorage(LocalStorageKeys.searchValue, value)}
+        type="search"
+        id="search-input"
+        className="input-search"
+        placeholder={Messages.searchPlaceholder}
+      />
       <button type="submit">Search</button>
     </form>
   );
