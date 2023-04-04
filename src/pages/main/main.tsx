@@ -1,5 +1,4 @@
 import React, { ChangeEvent, Component } from 'react';
-import Header from 'src/components/header/header';
 import { UsersType } from 'src/utils/types/types';
 import Loader from 'src/components/loader/loader';
 import Card from 'src/components/card/card';
@@ -8,6 +7,7 @@ import { applyToLocalStorage, getFromLocalStorage } from 'src/utils/local-storag
 import '../../styles/entry.scss';
 import './main.scss';
 import InputSearch from 'src/components/search/input-search';
+import { Layout } from 'src/components/layout/layout';
 
 interface MainState {
   users: UsersType[];
@@ -37,10 +37,8 @@ export default class Main extends Component<Record<string, never>, MainState> {
 
   render() {
     return (
-      <div className="page__body">
-        <Header />
+      <Layout>
         <InputSearch handleChange={this.handleChange} searchQuery={this.state.searchQuery} />
-
         {this.state.users.length === 0 && <Loader />}
         {this.state.users.length > 0 && (
           <section className="cards">
@@ -52,7 +50,7 @@ export default class Main extends Component<Record<string, never>, MainState> {
             )}
           </section>
         )}
-      </div>
+      </Layout>
     );
   }
 }

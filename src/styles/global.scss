@@ -22,7 +22,16 @@ body {
   font-style: normal;
   list-style: none;
   min-height: 100vh;
+}
+
+#root {
   padding: 20px;
+}
+
+h1,
+h2,
+h3 {
+  font-family: Baloo, 'Arial', sans-serif;
 }
 
 a {

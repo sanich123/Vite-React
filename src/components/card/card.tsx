@@ -23,7 +23,6 @@ export default class ItemCard extends Component<{ user: Omit<UsersType, 'id'> }>
           <div className="card__address--city">{`City: ${city}`}</div>
           <div className="card__address--street">{`Street: ${street}`}</div>
           <div className="card__address--suite">{`Flat: ${suite}`}</div>
-
           <div className="card__address--zipcode">{`Zipcode: ${zipcode}`}</div>
         </div>
         <div className="card__phone">{`Phone: ${phone}`}</div>
