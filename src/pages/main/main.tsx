@@ -21,9 +21,6 @@ export default function Main() {
 
   useEffect(() => {
     fetchUsers(setUsers);
-  }, []);
-
-  useEffect(() => {
     window.addEventListener('beforeunload', () => localStorage.setItem(LocalStorageKeys.searchValue, searchRef.current), { once: true });
   }, []);
 
