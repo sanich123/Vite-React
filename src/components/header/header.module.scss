@@ -1,0 +1,32 @@
+.active {
+  color: #646cff;
+}
+
+.notActive {
+  opacity: 0.5;
+}
+
+.active,
+.notActive {
+  display: inline-block;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  transition: 0.5s;
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+
+.header {
+  padding: 1.5rem;
+}
+
+.headerUl {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-auto-flow: column;
+  place-items: center;
+  column-gap: 1.5rem;
+}
