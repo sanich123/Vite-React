@@ -27,7 +27,7 @@ describe('App', () => {
         <Main />
       </BrowserRouter>
     );
-    const search = screen.getByLabelText(/try to find something/i);
+    const search = screen.getByLabelText(/To find something focus into the input and click Enter/i);
     await UserEvent.type(search, 'превед');
     expect(await screen.findByDisplayValue('превед')).toBeDefined();
     await UserEvent.keyboard('[Enter]');
