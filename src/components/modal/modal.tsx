@@ -2,7 +2,7 @@ import { UsersType } from 'src/utils/types/types';
 import React, { useEffect } from 'react';
 import { RemoveScroll } from 'react-remove-scroll';
 import FocusLock from 'react-focus-lock';
-import setEscListener from 'src/utils/utils';
+import { setEscListener } from 'src/utils/utils';
 import styles from './modal.module.scss';
 
 interface ModalProps {
@@ -12,7 +12,13 @@ interface ModalProps {
 }
 
 export default function Modal({ users, idUser, setIsShowMore }: ModalProps) {
-  const [{ email, address: { city, street, suite, zipcode }, phone }] = users.filter(({ id }) => id === Number(idUser));
+  const [
+    {
+      email,
+      address: { city, street, suite, zipcode },
+      phone,
+    },
+  ] = users.filter(({ id }) => id === Number(idUser));
   const { overlay, modal } = styles;
 
   useEffect(() => {

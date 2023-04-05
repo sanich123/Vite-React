@@ -28,10 +28,9 @@ describe('App', () => {
       </BrowserRouter>
     );
     const search = screen.getByLabelText(/try to find something/i);
-    const submitBtn = screen.getByRole('button');
     await UserEvent.type(search, 'превед');
     expect(await screen.findByDisplayValue('превед')).toBeDefined();
-    await UserEvent.click(submitBtn);
+    await UserEvent.keyboard('[Enter]');
     expect(await screen.findByText(/превед/i)).toBeDefined();
   });
 });

@@ -60,8 +60,8 @@ export const INITIAL_STATE = {
 
 export const enum Messages {
   successSent = 'Поздравляем вас, отправка формы произошла весьма успешно',
-  searchLabel = 'Try to find something',
-  searchPlaceholder = 'Type here to search something',
+  searchLabel = 'To find something focus into the input and click Enter',
+  searchPlaceholder = 'Search here, motherfucker',
   didntFind = 'Your search query did not match any object in the server',
   didError = 'Some error occured',
 }
