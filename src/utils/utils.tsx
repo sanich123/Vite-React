@@ -15,11 +15,5 @@ export function setEscListener(setIsShowMore: SetStateBoolean) {
 }
 
 export function setBeforeUnloadListener(searchString: string) {
-  return window.addEventListener(
-    'beforeunload',
-    () => {
-      applyToLocalStorage(LocalStorageKeys.searchValue, searchString);
-    },
-    { once: true }
-  );
+  return window.addEventListener('beforeunload', () => applyToLocalStorage(LocalStorageKeys.searchValue, searchString), { once: true });
 }

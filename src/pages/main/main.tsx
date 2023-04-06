@@ -9,13 +9,21 @@ import { fetchUsers } from 'src/utils/async/async-functions';
 import { Messages } from 'src/utils/const/const';
 import '../../styles/entry.scss';
 import './main.scss';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from 'src/redux/store';
+import { pushUsers } from 'src/redux/search-slice/search-slice';
 
 export default function Main() {
   const { users, error, isLoading, isShowMore, idUser, setUsers, setError, setIsLoading, setIsShowMore, getIdUser } = useGetUsers();
+  const { search } = useSelector(({ searchQuery }: RootState) => searchQuery);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    fetchUsers({ setUsers, searchQuery: search, setError });
+  }, [setUsers, setError, search]);
 
   useEffect(() => {
-    fetchUsers({ setUsers, searchQuery: '', setError });
-  }, [setUsers, setError]);
+    dispatch(pushUsers(users));
+  }, [users, dispatch]);
 
   return (
     <Layout>
