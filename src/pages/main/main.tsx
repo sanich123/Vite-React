@@ -6,15 +6,16 @@ import InputSearch from 'src/components/search/input-search';
 import Loader from 'src/components/loader/loader';
 import Card from 'src/components/card/card';
 import { fetchUsers } from 'src/utils/async/async-functions';
-import { Messages } from 'src/utils/const/const';
+import { LocalStorageKeys, Messages } from 'src/utils/const/const';
 import '../../styles/entry.scss';
 import './main.scss';
+import { getFromLocalStorage } from 'src/utils/local-storage';
 
 export default function Main() {
   const { users, error, isLoading, isShowMore, idUser, setUsers, setError, setIsLoading, setIsShowMore, getIdUser } = useGetUsers();
 
   useEffect(() => {
-    fetchUsers({ setUsers, searchQuery: '', setError });
+    fetchUsers({ setUsers, searchQuery: getFromLocalStorage(LocalStorageKeys.searchValue), setError });
   }, [setUsers, setError]);
 
   return (
