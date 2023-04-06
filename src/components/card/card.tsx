@@ -1,6 +1,7 @@
+/* eslint-disable camelcase */
 import React from 'react';
 import { UsersType } from 'src/utils/types/types';
-import './card.scss';
+import styles from './card.module.scss';
 
 interface ItemCardProps {
   user: UsersType;
@@ -10,12 +11,13 @@ interface ItemCardProps {
 
 export default function ItemCard({ user, setIsShowMore, getIdUser }: ItemCardProps) {
   const { id, name, username } = user;
-
+  const { card, card__name, card__username, show__moreBtn } = styles;
   return (
-    <div className="user__card card">
-      <div className="card__name">{name}</div>
-      <div className="card__username">{username}</div>
+    <div className={`user__card ${card}`}>
+      <div className={card__name}>{name}</div>
+      <div className={card__username}>{username}</div>
       <button
+        className={show__moreBtn}
         type="button"
         onClick={() => {
           setIsShowMore(true);

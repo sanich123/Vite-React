@@ -19,7 +19,7 @@ export default function Modal({ users, idUser, setIsShowMore }: ModalProps) {
       phone,
     },
   ] = users.filter(({ id }) => id === Number(idUser));
-  const { overlay, modal } = styles;
+  const { overlay, modal, closeBtn, card } = styles;
 
   useEffect(() => {
     setEscListener(setIsShowMore);
@@ -30,18 +30,18 @@ export default function Modal({ users, idUser, setIsShowMore }: ModalProps) {
       <section className={modal}>
         <RemoveScroll>
           <FocusLock>
-            <div className="user__card card">
-              <div className="card__email">{email}</div>
+            <div className={card}>
               <div className="card__address">
+                <div>{email}</div>
                 <div className="card__address--city">{`City: ${city}`}</div>
                 <div className="card__address--street">{`Street: ${street}`}</div>
                 <div className="card__address--suite">{`Flat: ${suite}`}</div>
                 <div className="card__address--zipcode">{`Zipcode: ${zipcode}`}</div>
                 <div className="card__address--phone">{`Phone: ${phone}`}</div>
+                <button type="button" className={closeBtn} onClick={() => setIsShowMore(false)}>
+                  ⨉
+                </button>
               </div>
-              <button type="button" onClick={() => setIsShowMore(false)}>
-                ⨉
-              </button>
             </div>
           </FocusLock>
         </RemoveScroll>
