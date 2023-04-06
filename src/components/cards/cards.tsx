@@ -1,32 +1,18 @@
-import React, { Component } from 'react';
-import { FormDataValues } from '../../utils/types/form-types';
+/* eslint-disable prettier/prettier */
+import React from 'react';
+import { FieldValues } from 'react-hook-form';
 import './cards.scss';
 
-export default class Cards extends Component<{ data: FormDataValues[] }> {
-  render() {
-    return (
-      <section className="cards">
-        {this.props.data.map(
-          ({
-            name,
-            surname,
-            city,
-            zipcode,
-            country,
-            sexuality,
-            gender,
-            img,
-            imgName,
-            birthday,
-            delivery,
-            time,
-            subscribeEmail,
-            subscribeSms,
-          }) => (
+export default function Cards({ formData }: { formData: FieldValues[] }) {
+  return (
+    <section className="cards">
+      {formData.map(
+        ({ name, surname, city, zipcode, country, sexuality, gender, birthday, delivery, time, img, checkboxes, imgAlt }) =>
+          (
             <div key={`${name}${surname}`} className="cards__item item">
               <img
-                src={img.toString()}
-                alt={`${imgName}`}
+                src={img}
+                alt={imgAlt}
                 width="150px"
                 height="150px"
                 className="item__img"
@@ -48,18 +34,11 @@ export default class Cards extends Component<{ data: FormDataValues[] }> {
               </div>
               <div className="item__email">
                 <span className="item__text">
-                  {`Send me emails: ${subscribeEmail === 'on' ? 'yes' : 'no'}`}
+                  {`Send me: ${checkboxes.length ? checkboxes.join(', ') : 'nothing'}`}
                 </span>
               </div>
-              <div className="item__sms">
-                <span className="item__text">
-                  {`Send me sms: ${subscribeSms === 'on' ? 'yes' : 'no'}`}
-                </span>
-              </div>
-            </div>
-          )
-        )}
-      </section>
-    );
-  }
+            </div>)
+      )}
+    </section>
+  );
 }

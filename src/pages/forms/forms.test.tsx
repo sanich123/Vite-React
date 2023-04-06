@@ -13,14 +13,10 @@ describe('Forms', () => {
         <Forms />
       </BrowserRouter>
     );
-    ['main', 'about us', 'forms'].map((item) =>
-      expect(screen.getByText(new RegExp(`${item}`, 'i'))).toBeDefined()
-    );
+    ['main', 'about us', 'forms'].map((item) => expect(screen.getByText(new RegExp(`${item}`, 'i'))).toBeDefined());
     COUNTRIES.slice(0, 30).map((country) => {
       expect(screen.getByText(new RegExp(`${country}`, 'i'))).toBeDefined();
     });
-    ['homosexual', 'lesbian', 'female', 'hetero'].map((value) =>
-      expect(screen.getByLabelText(new RegExp(`${value}`))).toBeDefined()
-    );
+    ['homosexual', 'lesbian', 'female', 'hetero'].map((value) => expect(screen.getByLabelText(new RegExp(`${value}`))).toBeDefined());
   });
 });

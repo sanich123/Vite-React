@@ -13,11 +13,7 @@ export default class Header extends Component {
           <ul className={headerUl}>
             {Object.values(ROUTES).map(({ path, name }) => (
               <li key={`${path}-${name}`}>
-                <NavLink
-                  to={path}
-                  end
-                  className={({ isActive }) => (isActive ? active : notActive)}
-                >
+                <NavLink to={path} end className={({ isActive }) => (isActive ? active : notActive)}>
                   {name}
                 </NavLink>
               </li>

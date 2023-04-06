@@ -1,30 +1,22 @@
-import React, { RefObject } from 'react';
+import React, { Fragment } from 'react';
 import { SELECTS_MOCKS } from 'src/utils/const/texts';
+import { InputRegisterType } from 'src/utils/types/form-types';
 
-export default class Selects extends React.Component<{
-  [key: string]: RefObject<HTMLSelectElement>;
-}> {
-  render() {
-    return (
-      <div className="input__wrapper input__wrapper--select input-selects">
-        {SELECTS_MOCKS.map(({ name, defaultValue, options }) => (
-          <select
-            key={`${name}${defaultValue}`}
-            name={name}
-            id={`input-select-${name}`}
-            ref={name === 'country' ? this.props.countryInput : this.props.cityInput}
-            required
-            defaultValue={defaultValue}
-            className="input__select"
-          >
+export default function Selects({ register, errors }: InputRegisterType) {
+  return (
+    <div className="input__wrapper input__wrapper--select input-selects">
+      {SELECTS_MOCKS.map(({ name, defaultValue, options }) => (
+        <Fragment key={`${name} ${defaultValue}`}>
+          <select {...register(name, { required: true })} key={`${name} ${defaultValue}`} name={name} id={`input-select-${name}`} defaultValue={defaultValue} className="input__select">
             {options.map((country) => (
               <option key={country} value={country}>
                 {country}
               </option>
             ))}
           </select>
-        ))}
-      </div>
-    );
-  }
+          {errors[name] && <span className="errors-span">This field is required</span>}
+        </Fragment>
+      ))}
+    </div>
+  );
 }

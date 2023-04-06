@@ -1,13 +1,14 @@
 import React from 'react';
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { screen } from '../../tests/test-utils';
 import { render } from '@testing-library/react';
 import Cards from './cards';
 import { MOCK_DATA } from 'src/utils/mocks/mocks';
 
 describe('Cards', () => {
+  global.URL.createObjectURL = vi.fn();
   it('should correctly render', () => {
-    render(<Cards data={MOCK_DATA} />);
+    render(<Cards formData={MOCK_DATA} />);
     MOCK_DATA.map(({ name, surname, zipcode, birthday, delivery, time, country, city }) => {
       expect(screen.getByText(new RegExp(`${name}`))).toBeDefined();
       expect(screen.getByText(new RegExp(`${surname}`))).toBeDefined();

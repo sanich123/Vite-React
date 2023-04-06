@@ -42,3 +42,22 @@ export const enum InputKeys {
   delivery = 'delivery',
   time = 'time',
 }
+
+export const INITIAL_STATE = {
+  name: '',
+  surname: '',
+  city: 'Monterey',
+  country: 'Russia',
+  delivery: '',
+  gender: '',
+  sexuality: '',
+  zipcode: '',
+  birthday: '',
+  time: '',
+  img: '',
+  checkboxes: [],
+};
+
+export const enum Messages {
+  successSent = 'Поздравляем вас, отправка формы произошла весьма успешно',
+}

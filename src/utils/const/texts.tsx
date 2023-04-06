@@ -1,28 +1,4 @@
-import { InitialState } from 'src/utils/types/form-types';
 import { getFormattedDate } from '../date-utils';
-
-export const enum Warnings {
-  inputText = 'This field should not be empty',
-  inputFile = 'You are required to add a file',
-  dataRequirings = 'Date must be below 01 January 2024',
-  timeRequirings = 'Time must be from 10 till 18',
-}
-
-export const INITIAL_STATE: InitialState = {
-  name: '',
-  surname: '',
-  zipcode: '',
-  birthday: '',
-  delivery: '',
-  time: '',
-  country: 'Russia',
-  city: 'Monterey',
-  sexuality: 'hetero',
-  gender: 'male',
-  subscribeEmail: 'on',
-  subscribeSms: '',
-  img: '',
-};
 
 export const COUNTRIES = [
   'Afghanistan',
@@ -669,7 +645,7 @@ export const INPUTS_TEXT_MOCKS = [
   },
   {
     name: 'zipcode',
-    type: 'number',
+    type: 'text',
     placeholder: 'Where are you from',
     pattern: '',
     title: 'You are allowed to type only numbers in this field',
@@ -678,13 +654,15 @@ export const INPUTS_TEXT_MOCKS = [
 
 export const CHECKBOXES_MOCKS = [
   {
-    name: 'Email',
+    name: 'checkboxes',
     text: 'Send me emails',
+    value: 'email',
     defaultChecked: true,
   },
   {
-    name: 'Sms',
+    name: 'checkboxes',
     text: 'Send me sms',
+    value: 'sms',
     defaultChecked: false,
   },
 ];

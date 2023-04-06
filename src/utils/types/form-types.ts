@@ -1,4 +1,5 @@
 import { RefObject } from 'react';
+import { FieldErrors, FieldValues, UseFormRegister } from 'react-hook-form';
 
 export type FormDataValues = {
   [key: string]: FormDataEntryValue | string;
@@ -22,3 +23,8 @@ export interface InputsRefsAsProps {
     [key: string]: RefObject<HTMLInputElement>;
   };
 }
+
+export type InputRegisterType = {
+  register: UseFormRegister<{ [key: string]: string }>;
+  errors: FieldErrors<FieldValues>;
+};

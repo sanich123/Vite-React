@@ -132,3 +132,11 @@
 .input-checkboxes {
   grid-area: checkboxes;
 }
+
+.errors-span {
+  display: grid;
+  justify-self: center;
+  color: red;
+  font-style: italic;
+  font-size: 0.8rem;
+}
