@@ -3,10 +3,9 @@ import { useForm } from 'react-hook-form';
 import { FetchUsersProps, fetchUsers } from 'src/utils/async/async-functions';
 import { errorHandler } from 'src/utils/errors/errors';
 import { FormDataValues } from 'src/utils/types/form-types';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from 'src/redux/store';
 import { changeSearch } from 'src/redux/search-slice/search-slice';
 import { Messages } from 'src/utils/const/const';
+import { useAppDispatch, useAppSelector } from 'src/redux/hooks/hooks';
 import './input-search.scss';
 
 type FormSearchProps = {
@@ -14,8 +13,8 @@ type FormSearchProps = {
 };
 
 export default function InputSearch({ setIsLoading, setError, setUsers }: Pick<FetchUsersProps, 'setError' | 'setUsers'> & FormSearchProps) {
-  const { search: searchString } = useSelector(({ searchQuery }: RootState) => searchQuery);
-  const dispatch = useDispatch();
+  const { search: searchString } = useAppSelector(({ searchQuery }) => searchQuery);
+  const dispatch = useAppDispatch();
   const { register, handleSubmit, getValues } = useForm({
     defaultValues: {
       search: searchString,

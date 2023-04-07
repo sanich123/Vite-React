@@ -7,16 +7,15 @@ import Loader from 'src/components/loader/loader';
 import Card from 'src/components/card/card';
 import { fetchUsers } from 'src/utils/async/async-functions';
 import { Messages } from 'src/utils/const/const';
+import { pushUsers } from 'src/redux/search-slice/search-slice';
+import { useAppDispatch, useAppSelector } from 'src/redux/hooks/hooks';
 import '../../styles/entry.scss';
 import './main.scss';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from 'src/redux/store';
-import { pushUsers } from 'src/redux/search-slice/search-slice';
 
 export default function Main() {
   const { users, error, isLoading, isShowMore, idUser, setUsers, setError, setIsLoading, setIsShowMore, getIdUser } = useGetUsers();
-  const { search } = useSelector(({ searchQuery }: RootState) => searchQuery);
-  const dispatch = useDispatch();
+  const { search } = useAppSelector(({ searchQuery }) => searchQuery);
+  const dispatch = useAppDispatch();
   useEffect(() => {
     fetchUsers({ setUsers, searchQuery: search, setError });
   }, [setUsers, setError, search]);
