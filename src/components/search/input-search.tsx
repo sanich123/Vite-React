@@ -1,11 +1,10 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
 import { FetchUsersProps, fetchUsers } from 'src/utils/async/async-functions';
 import { LocalStorageKeys, Messages } from 'src/utils/const/const';
 import { errorHandler } from 'src/utils/errors/errors';
 import { FormDataValues } from 'src/utils/types/form-types';
-import { getFromLocalStorage } from 'src/utils/local-storage';
-import { setBeforeUnloadListener } from 'src/utils/utils';
+import { applyToLocalStorage, getFromLocalStorage } from 'src/utils/local-storage';
 import './input-search.scss';
 
 type FormSearchProps = {
@@ -13,13 +12,11 @@ type FormSearchProps = {
 };
 
 export default function InputSearch({ setIsLoading, setError, setUsers }: Pick<FetchUsersProps, 'setError' | 'setUsers'> & FormSearchProps) {
-  const { register, handleSubmit, getValues } = useForm({
+  const { register, handleSubmit } = useForm({
     defaultValues: {
       search: getFromLocalStorage(LocalStorageKeys.searchValue),
     },
   });
-
-  useEffect(() => setBeforeUnloadListener(getValues().search));
 
   async function onSubmit({ search }: FormDataValues) {
     if (typeof search === 'string') {
@@ -27,6 +24,7 @@ export default function InputSearch({ setIsLoading, setError, setUsers }: Pick<F
         setIsLoading(true);
         await fetchUsers({ setUsers, searchQuery: search, setError });
         setIsLoading(false);
+        applyToLocalStorage(LocalStorageKeys.searchValue, search);
       } catch (err) {
         setIsLoading(false);
         errorHandler({ err, stateErrorHandler: setError });
