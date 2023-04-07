@@ -1,18 +1,13 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { FetchUsersProps, fetchUsers } from 'src/utils/async/async-functions';
-import { errorHandler } from 'src/utils/errors/errors';
 import { FormDataValues } from 'src/utils/types/form-types';
 import { changeSearch } from 'src/redux/search-slice/search-slice';
 import { Messages } from 'src/utils/const/const';
 import { useAppDispatch, useAppSelector } from 'src/redux/hooks/hooks';
 import './input-search.scss';
+import { fetchUsers } from 'src/utils/async/async-functions';
 
-type FormSearchProps = {
-  setIsLoading: (arg: boolean) => void;
-};
-
-export default function InputSearch({ setIsLoading, setError, setUsers }: Pick<FetchUsersProps, 'setError' | 'setUsers'> & FormSearchProps) {
+export default function InputSearch() {
   const { search: searchString } = useAppSelector(({ searchQuery }) => searchQuery);
   const dispatch = useAppDispatch();
   const { register, handleSubmit, getValues } = useForm({
@@ -23,15 +18,8 @@ export default function InputSearch({ setIsLoading, setError, setUsers }: Pick<F
 
   async function onSubmit({ search }: FormDataValues) {
     if (typeof search === 'string') {
-      try {
-        setIsLoading(true);
-        await fetchUsers({ setUsers, searchQuery: search, setError });
-        setIsLoading(false);
-        dispatch(changeSearch(getValues().search));
-      } catch (err) {
-        setIsLoading(false);
-        errorHandler({ err, stateErrorHandler: setError });
-      }
+      dispatch(changeSearch(getValues().search));
+      dispatch(fetchUsers(search));
     }
   }
 

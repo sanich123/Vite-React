@@ -1,23 +1,16 @@
+import { createAsyncThunk } from '@reduxjs/toolkit';
 import { URL_USERS } from '../const/const';
-import { errorHandler } from '../errors/errors';
-import { UsersType } from '../types/types';
 
-export type FetchUsersProps = {
-  setUsers: (arg: UsersType[]) => void;
-  searchQuery: string;
-  setError: (arg: { [key: string]: string }) => void;
-};
-
-export async function fetchUsers({ setUsers, searchQuery, setError }: FetchUsersProps): Promise<void> {
+export const fetchUsers = createAsyncThunk('searchSlice/fetchUsers', async (search: string, { rejectWithValue }) => {
   try {
-    const response = await fetch(`${URL_USERS}?q=${searchQuery}`);
-    if (response.ok) {
-      const apiUsers = await response.json();
-      setUsers(apiUsers);
-    } else {
-      throw new Error('Some error occured');
+    const response = await fetch(`${URL_USERS}?q=${search}`);
+    if (!response.ok) {
+      throw new Error('Server error');
     }
-  } catch (err) {
-    errorHandler({ err, stateErrorHandler: setError });
+    return await response.json();
+  } catch (error) {
+    if (error instanceof Error) {
+      return rejectWithValue(error.message);
+    }
   }
-}
+});

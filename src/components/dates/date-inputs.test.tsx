@@ -6,7 +6,29 @@ import DateInputs from './date-inputs';
 
 describe('DateInputs', () => {
   it('should render correctly', () => {
-    render(<DateInputs register={vi.fn()} errors={{ errors: {} }} />);
+    render(
+      <DateInputs
+        register={vi.fn()}
+        errors={{
+          errors: {},
+        }}
+      />
+    );
     ['birthday', 'choose your delivery date', 'choose your delivery time'].map((text) => expect(screen.getByLabelText(new RegExp(`${text}`, 'i'))).toBeDefined());
+  });
+  it('should show error messages', () => {
+    render(
+      <DateInputs
+        register={vi.fn()}
+        errors={{
+          errors: {
+            delivery: {
+              type: 'string',
+              message: 'Some message',
+            },
+          },
+        }}
+      />
+    );
   });
 });

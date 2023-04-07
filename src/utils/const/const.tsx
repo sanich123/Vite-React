@@ -32,17 +32,6 @@ export const enum LocalStorageKeys {
 
 export const URL_USERS = 'https://jsonplaceholder.typicode.com/users';
 
-// export const enum InputKeys {
-//   subscribeEmail = 'subscribeEmail',
-//   subscribeSms = 'subscribeSms',
-//   sexuality = 'sexuality',
-//   gender = 'gender',
-//   img = 'img',
-//   imgName = 'imgName',
-//   delivery = 'delivery',
-//   time = 'time',
-// }
-
 export const INITIAL_STATE = {
   name: '',
   surname: '',
@@ -64,4 +53,10 @@ export const enum Messages {
   searchPlaceholder = 'Search here, motherfucker',
   didntFind = 'Your search query did not match any object in the server',
   didError = 'Some error occured',
+}
+
+export const enum Status {
+  loading = 'loading',
+  fulfilled = 'fulfilled',
+  rejected = 'rejected',
 }

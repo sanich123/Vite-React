@@ -1,19 +1,19 @@
 import React from 'react';
-import { describe, expect, it, vi } from 'vitest';
-import { render } from '@testing-library/react';
+import { describe, expect, it } from 'vitest';
 import { screen } from '../../tests/test-utils';
 import UserEvent from '@testing-library/user-event';
 import InputSearch from './input-search';
+import { renderWithProviders } from 'src/tests/render-with-providers';
 
 describe('Input-search', () => {
   it('should correctly renders', () => {
-    render(<InputSearch setUsers={vi.fn()} setError={vi.fn()} setIsLoading={vi.fn()} />);
+    renderWithProviders(<InputSearch />);
     expect(screen.getByLabelText(/To find something focus into the input and click Enter/i)).toBeDefined();
     expect(screen.getByPlaceholderText(/Search here, motherfucker/i)).toBeDefined();
     expect(screen.getByRole('searchbox')).toBeDefined();
   });
   it('should interract with user', async () => {
-    render(<InputSearch setUsers={vi.fn()} setError={vi.fn()} setIsLoading={vi.fn()} />);
+    renderWithProviders(<InputSearch />);
     const searchBox = screen.getByPlaceholderText(/Search here, motherfucker/i);
     expect(searchBox).toBeDefined();
     await UserEvent.type(searchBox, 'hi');

@@ -301,3 +301,23 @@ export const MOCK_DATA = [
     checkboxes: ['email', 'sms'],
   },
 ];
+
+export const USER_WITHOUT_CHECKBOXES = [
+  {
+    name: 'Sasha',
+    surname: 'Varonin',
+    zipcode: '119620',
+    birthday: '2017-aaaaaa',
+    delivery: '2023-03-15',
+    time: '17:25',
+    country: 'Pakistan',
+    city: 'Alexandria',
+    sexuality: 'hetero',
+    gender: 'female',
+    subscribeEmail: 'on',
+    subscribeSms: 'on',
+    img: 'blob:http://127.0.0.1:5173/1e9bd057-0ce6-488d-a495-208052b9eed2',
+    imgName: 'Снимок экрана 2022-04-13 210258.png',
+    checkboxes: [],
+  },
+];

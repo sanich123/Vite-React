@@ -3,7 +3,7 @@ import { describe, expect, it, vi } from 'vitest';
 import { screen } from '../../tests/test-utils';
 import { render } from '@testing-library/react';
 import Cards from './cards';
-import { MOCK_DATA } from 'src/utils/mocks/mocks';
+import { MOCK_DATA, USER_WITHOUT_CHECKBOXES } from 'src/utils/mocks/mocks';
 
 describe('Cards', () => {
   global.URL.createObjectURL = vi.fn();
@@ -19,5 +19,9 @@ describe('Cards', () => {
       expect(screen.getByText(new RegExp(`${country}`))).toBeDefined();
       expect(screen.getByText(new RegExp(`${city}`))).toBeDefined();
     });
+  });
+  it('should correctly render with no checkbox values', () => {
+    render(<Cards formData={USER_WITHOUT_CHECKBOXES} />);
+    expect(screen.getByText(/send me: nothing/i)).toBeDefined();
   });
 });
