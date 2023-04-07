@@ -3,8 +3,8 @@ import { describe, expect, it, vi } from 'vitest';
 import { screen } from '../../tests/test-utils';
 import { render } from '@testing-library/react';
 import CheckboxesInputs from './checkboxes';
-// import UserEvent from '@testing-library/user-event';
 import userEvent from '@testing-library/user-event';
+
 describe('Checkboxes', () => {
   it('should render correctly', () => {
     render(<CheckboxesInputs register={vi.fn()} />);
