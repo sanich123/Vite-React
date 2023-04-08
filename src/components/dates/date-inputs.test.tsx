@@ -15,7 +15,9 @@ describe('DateInputs', () => {
         }}
       />
     );
-    ['birthday', 'choose your delivery date', 'choose your delivery time'].map((text) => expect(screen.getByLabelText(new RegExp(`${text}`, 'i'))).toBeDefined());
+    ['birthday', 'choose your delivery date', 'choose your delivery time'].map((text) =>
+      expect(screen.getByLabelText(new RegExp(`${text}`, 'i'))).toBeDefined()
+    );
   });
   it('should correctly interract with the user', async () => {
     render(
