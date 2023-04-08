@@ -27,7 +27,11 @@ export default function Main() {
       {error && <h1>{`An error occured: ${error}`}</h1>}
       {users.length === 0 && <h1>{Messages.didntFind}</h1>}
       {isShowMore && <Modal users={users} idUser={idUser} setIsShowMore={setIsShowMore} />}
-      <section className="cards">{status === Status.fulfilled && !isShowMore && users.map((user) => <Card key={user.id} user={user} setIsShowMore={setIsShowMore} getIdUser={getIdUser} />)}</section>
+      <section className="cards">
+        {status === Status.fulfilled &&
+          !isShowMore &&
+          users.map((user) => <Card key={user.id} user={user} setIsShowMore={setIsShowMore} getIdUser={getIdUser} />)}
+      </section>
     </Layout>
   );
 }
