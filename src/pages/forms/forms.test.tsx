@@ -47,11 +47,10 @@ describe('Forms', () => {
     expect(await screen.findByDisplayValue('2023-05-07')).toBeDefined();
     await user.type(inputBirthday, '1930-05-06');
     expect(await screen.findByDisplayValue('1930-05-06')).toBeDefined();
-    await user.click(homoSexRadio);
+
     await user.click(femaleRadio);
     await user.upload(inputFile, file);
-    if (homoSexRadio instanceof HTMLInputElement && femaleRadio instanceof HTMLInputElement && emailCheckbox instanceof HTMLInputElement && inputFile instanceof HTMLInputElement) {
-      expect(homoSexRadio.checked).toBeDefined();
+    if (femaleRadio instanceof HTMLInputElement && emailCheckbox instanceof HTMLInputElement && inputFile instanceof HTMLInputElement) {
       expect(femaleRadio.checked).toBeDefined();
       expect(emailCheckbox.checked).toBeDefined();
       if (inputFile.files) {
@@ -59,6 +58,12 @@ describe('Forms', () => {
         expect(inputFile.files.item(0)).toStrictEqual(file);
         expect(inputFile.files).toHaveLength(1);
       }
+    }
+    await user.click(submitBtn);
+    expect(await screen.findByText(/This fields are required, you must choose your gender and sexuality/i)).toBeDefined();
+    await user.click(homoSexRadio);
+    if (homoSexRadio instanceof HTMLInputElement) {
+      expect(homoSexRadio.checked).toBeDefined();
     }
     await user.click(submitBtn);
     expect(await screen.findByText(/send me: nothing/i)).toBeDefined();
