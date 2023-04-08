@@ -1,5 +1,3 @@
-import { LocalStorageKeys } from './const/const';
-import { applyToLocalStorage } from './local-storage';
 import { SetStateBoolean } from './types/types';
 
 export function setEscListener(setIsShowMore: SetStateBoolean) {
