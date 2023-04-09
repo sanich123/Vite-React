@@ -5,6 +5,7 @@ import Forms from 'src/pages/forms/forms';
 import AboutUs from 'src/pages/about-us/about-us';
 import ErrorPage from 'src/pages/error-page/error-page';
 import { Routes } from 'src/utils/const/const';
+import GraphiQl from 'src/components/grqphiql/graphiql';
 
 export const router = createBrowserRouter([
   {
@@ -20,5 +21,9 @@ export const router = createBrowserRouter([
     path: Routes.forms,
     element: <Forms />,
     errorElement: <ErrorPage />,
+  },
+  {
+    path: '/graphiql',
+    element: <GraphiQl />,
   },
 ]);
