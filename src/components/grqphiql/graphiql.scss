@@ -1,19 +1,37 @@
 .wrapper {
   display: flex;
+  height: 100vh;
 }
 
 .resizer {
-  width: 20px;
-  height: 20px;
+  min-height: 5px;
+  min-width: 5px;
   border: 1px solid blue;
+  &:hover {
+    border: 8px solid blue;
+  }
 }
 
 .wrapper-right {
   display: flex;
   flex: 1 1 0%;
   flex-direction: column;
+  border: 1px solid red;
+}
+
+.topSide {
+  height: 80%;
 }
 
 .bottom {
   flex: 1 1 0%;
 }
+
+.leftSide {
+  width: 40%;
+  border: 1px solid red;
+}
+.wrapper-right {
+  height: 100vh;
+}
+
