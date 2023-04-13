@@ -47,9 +47,9 @@ export default function GraphiQl() {
   }
 
   return (
-    <div className="wrapper" ref={parent}>
+    <div className="wrapper" ref={parent} onMouseUp={mouseUpHandler}>
       <div className="wrapper-right">
-        <input type="textarea" className="topSide" placeholder="You can type your graphsql requests here" ref={up} />
+        <input type="textarea" className="topSide" placeholder="You can type your graphiql requests here" ref={up} />
         <div
           className="resizer"
           data-direction="vertical"
