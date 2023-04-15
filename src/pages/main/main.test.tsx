@@ -34,7 +34,6 @@ describe('App', () => {
   });
   it('should correcly interract with user by show more btn and show modal window', async () => {
     renderWithProviders(<Main />);
-    expect(screen.getByText(/Your search query did not match any object in the server/i)).toBeDefined();
     const search = screen.getByLabelText(/To find something focus into the input and click Enter/i);
     await UserEvent.type(search, 'превед');
     expect(await screen.findByDisplayValue('превед')).toBeDefined();

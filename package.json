@@ -9,8 +9,8 @@
     "preview": "vite preview",
     "test": "vitest",
     "coverage": "vitest run --coverage",
-    "eslint": "eslint --ext .tsx --ext .ts src/",
-    "eslint:fix": "eslint --ext .tsx --ext .ts src/ --fix"
+    "eslint": "eslint --ext .tsx,.ts src/",
+    "eslint:fix": "eslint --ext .tsx,.ts src/ --fix"
   },
   "dependencies": {
     "@hookform/error-message": "^2.0.1",
