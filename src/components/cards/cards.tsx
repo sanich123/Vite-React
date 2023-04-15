@@ -9,7 +9,7 @@ export default function Cards({ formData }: { formData: FieldValues[] }) {
       {formData.map(
         ({ name, surname, city, zipcode, country, sexuality, gender, birthday, delivery, time, img, checkboxes, imgAlt }) =>
           (
-            <div key={`${name}${surname}`} className="cards__item item">
+            <div key={`${name}${surname}${time}`} className="cards__item item">
               <img
                 src={img}
                 alt={imgAlt}

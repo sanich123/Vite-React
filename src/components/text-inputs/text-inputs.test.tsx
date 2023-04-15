@@ -15,8 +15,12 @@ describe('Text-inputs', () => {
   });
   it('should interact with the user', async () => {
     render(<TextInputs register={vi.fn()} errors={{ errors: {} }} />);
-    const inputSurname = screen.getByText(/surname/i);
+    const inputSurname = screen.getByRole('textbox', { name: /surname/i });
     await UserEvent.type(inputSurname, 'превед');
     expect(await screen.findByDisplayValue('превед')).toBeDefined();
+    await UserEvent.clear(inputSurname);
+    if (inputSurname instanceof HTMLInputElement) {
+      expect(inputSurname.value).toEqual('');
+    }
   });
 });

@@ -14,7 +14,14 @@
     text-transform: uppercase;
     font-style: bold;
   }
-  &__email {
-    font-style: italic;
-  }
+}
+
+.show__moreBtn {
+  border: none;
+  outline: none;
+  background: transparent;
+  color: yellow;
+  text-transform: uppercase;
+  font-style: italic;
+  cursor: pointer;
 }

@@ -1,28 +1,12 @@
-import { RefObject } from 'react';
 import { FieldErrors, FieldValues, UseFormRegister } from 'react-hook-form';
 
 export type FormDataValues = {
-  [key: string]: FormDataEntryValue | string;
+  [key: string]: FormDataEntryValue;
 };
 
 export type InitialState = {
   [key: string]: string;
 };
-
-export type FormState = {
-  data: FormDataValues[];
-  disabled: boolean;
-  success: boolean;
-  inputsState: FormDataValues;
-};
-
-export type ObjOfRefs = { [key: string]: RefObject<HTMLInputElement | HTMLSelectElement> };
-
-export interface InputsRefsAsProps {
-  inputs: {
-    [key: string]: RefObject<HTMLInputElement>;
-  };
-}
 
 export type InputRegisterType = {
   register: UseFormRegister<{ [key: string]: string }>;

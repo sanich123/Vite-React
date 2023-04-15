@@ -1,18 +1,34 @@
-import React, { ChangeEvent } from 'react';
+import React from 'react';
+import { useForm } from 'react-hook-form';
+import { FormDataValues } from 'src/utils/types/form-types';
+import { changeSearch } from 'src/redux/search-slice/search-slice';
+import { Messages } from 'src/utils/const/const';
+import { useAppDispatch, useAppSelector } from 'src/redux/hooks/hooks';
 import './input-search.scss';
+import { fetchUsers } from 'src/utils/async/async-functions';
 
-type InputSearchProps = {
-  handleChange: (target: ChangeEvent<HTMLInputElement>) => void;
-  searchQuery: string;
-};
+export default function InputSearch() {
+  const { search: searchString } = useAppSelector(({ searchQuery }) => searchQuery);
+  const dispatch = useAppDispatch();
+  const { register, handleSubmit, getValues } = useForm({
+    defaultValues: {
+      search: searchString,
+    },
+  });
 
-export default function InputSearch({ handleChange, searchQuery }: InputSearchProps) {
+  async function onSubmit({ search }: FormDataValues) {
+    if (typeof search === 'string') {
+      dispatch(changeSearch(getValues().search));
+      dispatch(fetchUsers(search));
+    }
+  }
+
   return (
-    <div className="inputs-search-wrapper">
+    <form className="inputs-search-wrapper" onSubmit={handleSubmit(onSubmit)}>
       <label htmlFor="search-input" className="input-search-label">
-        Try to find something
+        {Messages.searchLabel}
       </label>
-      <input type="search" id="search-input" className="input-search" placeholder="Type here to search something" onChange={handleChange} value={searchQuery} />
-    </div>
+      <input {...register('search')} type="search" id="search-input" className="input-search" placeholder={Messages.searchPlaceholder} />
+    </form>
   );
 }

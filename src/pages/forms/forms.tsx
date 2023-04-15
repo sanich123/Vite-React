@@ -10,6 +10,9 @@ import Header from 'src/components/header/header';
 import Cards from 'src/components/cards/cards';
 import { INITIAL_STATE, Messages } from 'src/utils/const/const';
 import './forms.scss';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from 'src/redux/store';
+import { pushData } from 'src/redux/form-slice/form-slice';
 
 export default function Forms() {
   const {
@@ -18,8 +21,9 @@ export default function Forms() {
     reset,
     formState: { isSubmitSuccessful, errors },
   } = useForm();
+  const { formData: dataForm } = useSelector(({ formData }: RootState) => formData);
+  const dispatch = useDispatch();
   const [success, setSuccessSending] = useState(false);
-  const [formData, setFormData] = useState<FieldValues[]>([]);
 
   useEffect(() => {
     if (isSubmitSuccessful) {
@@ -33,7 +37,7 @@ export default function Forms() {
     const imgAlt = img[0].name;
     data.img = stringUrl;
     data.imgAlt = imgAlt;
-    setFormData([...formData, data]);
+    dispatch(pushData(data));
     setSuccessSending(true);
     setTimeout(() => setSuccessSending(false), 2000);
   }
@@ -52,7 +56,7 @@ export default function Forms() {
           Submit
         </button>
         {success && <div className="success-message">{Messages.successSent}</div>}
-        {formData.length > 0 && <Cards formData={formData} />}
+        {dataForm.length > 0 && <Cards formData={dataForm} />}
       </form>
     </>
   );
