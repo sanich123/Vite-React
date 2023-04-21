@@ -1,11 +1,12 @@
 import { RouterProvider } from 'react-router-dom';
-import React, { StrictMode } from 'react';
-import ReactDOM from 'react-dom/client';
+import { StrictMode } from 'react';
+import { hydrateRoot } from 'react-dom/client';
 import { router } from './router/router';
 import { setupStore } from './redux/store';
 import { Provider } from 'react-redux';
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+hydrateRoot(
+  document.getElementById('root') as HTMLElement,
   <StrictMode>
     <Provider store={setupStore()}>
       <RouterProvider router={router} />
