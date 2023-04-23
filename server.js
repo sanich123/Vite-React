@@ -46,15 +46,11 @@ app.use('*', async (req, res) => {
       template = templateHtml;
       render = (await import('./dist/server/entry-server.js')).render;
     }
-
     const rendered = await render(url, ssrManifest);
-
     const html = template.replace('<!--app-head-->', rendered.head ?? '').replace('<!--app-html-->', rendered.html ?? '');
-
     res.status(200).set({ 'Content-Type': 'text/html' }).end(html);
   } catch (e) {
     vite?.ssrFixStacktrace(e);
-    console.log(e.stack);
     res.status(500).end(e.stack);
   }
 });
