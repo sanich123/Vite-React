@@ -1,5 +1,4 @@
 /* eslint-disable camelcase */
-import React from 'react';
 import { UsersType } from 'src/utils/types/types';
 import styles from './card.module.scss';
 
