@@ -17,7 +17,9 @@ export default function TextInputs({ register, errors }: InputRegisterType) {
             placeholder={placeholder}
             className="input__text"
           />
-          {errors && errors[name] && <span className="errors-span">Required field, the first letter must be capital and the length must be more than 4 symbols</span>}
+          {errors && errors[name] && (
+            <span className="errors-span">Required field, the first letter must be capital and the length must be more than 4 symbols</span>
+          )}
         </div>
       ))}
     </>

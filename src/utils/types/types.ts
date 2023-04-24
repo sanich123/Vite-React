@@ -21,3 +21,4 @@ export interface UsersType {
     bs: string;
   };
 }
+export type SetStateBoolean = (arg: boolean) => void;

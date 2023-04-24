@@ -1,18 +1,43 @@
-import React, { ChangeEvent } from 'react';
+import React from 'react';
+import { useForm } from 'react-hook-form';
+import { FetchUsersProps, fetchUsers } from 'src/utils/async/async-functions';
+import { LocalStorageKeys, Messages } from 'src/utils/const/const';
+import { errorHandler } from 'src/utils/errors/errors';
+import { FormDataValues } from 'src/utils/types/form-types';
+import { applyToLocalStorage, getFromLocalStorage } from 'src/utils/local-storage';
 import './input-search.scss';
 
-type InputSearchProps = {
-  handleChange: (target: ChangeEvent<HTMLInputElement>) => void;
-  searchQuery: string;
+type FormSearchProps = {
+  setIsLoading: (arg: boolean) => void;
 };
 
-export default function InputSearch({ handleChange, searchQuery }: InputSearchProps) {
+export default function InputSearch({ setIsLoading, setError, setUsers }: Pick<FetchUsersProps, 'setError' | 'setUsers'> & FormSearchProps) {
+  const { register, handleSubmit } = useForm({
+    defaultValues: {
+      search: getFromLocalStorage(LocalStorageKeys.searchValue),
+    },
+  });
+
+  async function onSubmit({ search }: FormDataValues) {
+    if (typeof search === 'string') {
+      try {
+        setIsLoading(true);
+        await fetchUsers({ setUsers, searchQuery: search, setError });
+        setIsLoading(false);
+        applyToLocalStorage(LocalStorageKeys.searchValue, search);
+      } catch (err) {
+        setIsLoading(false);
+        errorHandler({ err, stateErrorHandler: setError });
+      }
+    }
+  }
+
   return (
-    <div className="inputs-search-wrapper">
+    <form className="inputs-search-wrapper" onSubmit={handleSubmit(onSubmit)}>
       <label htmlFor="search-input" className="input-search-label">
-        Try to find something
+        {Messages.searchLabel}
       </label>
-      <input type="search" id="search-input" className="input-search" placeholder="Type here to search something" onChange={handleChange} value={searchQuery} />
-    </div>
+      <input {...register('search')} type="search" id="search-input" className="input-search" placeholder={Messages.searchPlaceholder} />
+    </form>
   );
 }

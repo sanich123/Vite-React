@@ -17,8 +17,13 @@ vi.mock('react-router-dom', async () => ({
 describe('ErrorPage', () => {
   it('should correctly render error info', () => {
     render(<ErrorPage />);
-    ['Oops!', 'Sorry, an unexpected error has occurred.', 'We couldnt be able to find your page', 'some fucking text', '404', 'If you want go to the main page'].map((text) =>
-      expect(screen.getByText(new RegExp(`${text}`))).toBeDefined()
-    );
+    [
+      'Oops!',
+      'Sorry, an unexpected error has occurred.',
+      'We couldnt be able to find your page',
+      'some fucking text',
+      '404',
+      'If you want go to the main page',
+    ].map((text) => expect(screen.getByText(new RegExp(`${text}`))).toBeDefined());
   });
 });
