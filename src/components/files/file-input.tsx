@@ -4,7 +4,9 @@ import { InputRegisterType } from 'src/utils/types/form-types';
 export default function FileInput({ register, errors }: InputRegisterType) {
   return (
     <div className="input__wrapper input-file">
-      <label htmlFor="input-file">Send your photo</label>
+      <label htmlFor="input-file" data-cy="label-img">
+        Send your photo
+      </label>
       <input
         {...register('img', { required: true })}
         type="file"
@@ -12,6 +14,7 @@ export default function FileInput({ register, errors }: InputRegisterType) {
         accept="image/png, image/jpeg, image/jpg"
         name="img"
         className="input__file"
+        data-cy={'input-img'}
       />
       {errors['img'] && <span className="errors-span">This field is required</span>}
     </div>

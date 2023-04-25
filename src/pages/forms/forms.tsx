@@ -52,7 +52,7 @@ export default function Forms() {
         <FileInput register={register} errors={errors} />
         <RadioInputs register={register} errors={errors} />
         <CheckboxesInputs register={register} />
-        <button type="submit" className="submit-btn">
+        <button type="submit" className="submit-btn" data-cy="submit-btn">
           Submit
         </button>
         {success && <div className="success-message">{Messages.successSent}</div>}

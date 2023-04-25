@@ -14,6 +14,7 @@ export default function Selects({ register, errors }: InputRegisterType) {
             id={`input-select-${name}`}
             defaultValue={defaultValue}
             className="input__select"
+            data-cy={`select-${name}`}
           >
             {options.map((country) => (
               <option key={country} value={country}>
