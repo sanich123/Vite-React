@@ -1,5 +1,4 @@
 /* eslint-disable prettier/prettier */
-import React from 'react';
 import { FieldValues } from 'react-hook-form';
 import './cards.scss';
 

@@ -13,7 +13,29 @@ describe('Main page', () => {
         </BrowserRouter>
       </Provider>
     );
-    cy.get('input').type('hello, motherfucker');
-    cy.get('input').should('have.value', 'hello, motherfucker');
+    cy.get('a').should('have.length', 3);
+  });
+  it('should correctly interracts with the user', () => {
+    mount(
+      <Provider store={setupStore()}>
+        <BrowserRouter>
+          <Main />
+        </BrowserRouter>
+      </Provider>
+    );
+    cy.get('input').type('leanne');
+    cy.get('input').should('have.value', 'leanne');
+    cy.get('input').type('{enter}');
+    cy.get('.user__card').should('have.length', 1);
+    const showMoreBtn = cy.get('button').should('have.text', 'Show more');
+    showMoreBtn.click();
+    cy.get('.card__address--city').should('have.text', 'City: Gwenborough');
+    cy.get('.card__address--street').should('have.text', 'Street: Kulas Light');
+    cy.get('.card__address--suite').should('have.text', 'Flat: Apt. 556');
+    cy.get('.card__address--zipcode').should('have.text', 'Zipcode: 92998-3874');
+    cy.get('.card__address--phone').should('have.text', 'Phone: 1-770-736-8031 x56442');
+    const button = cy.get('button').should('have.text', '⨉');
+    button.click();
+    cy.get('.user__card').should('have.length', 1);
   });
 });
