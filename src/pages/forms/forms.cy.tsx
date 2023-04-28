@@ -15,9 +15,18 @@ describe('Forms', () => {
       </Provider>
     );
     ['Enter your name', 'Enter your surname', 'Where are you from'].forEach((placeholder) => cy.get(`input[placeholder*="${placeholder}"]`));
+    const submitBtn = cy.get('[data-cy="submit-btn"]');
+    cy.get('[data-cy="label-name"]').click();
+    cy.get('[data-cy="input-name"]').should('have.focus').type('fucking vladimir').should('be.visible');
+
+    submitBtn.click();
+
+    cy.contains(/Required field, the first letter must be capital and the length must be more than 4 symbols/i);
+    cy.contains(/This fields are required, you must choose your gender and sexuality/i);
+    cy.contains(/This field is required/i);
 
     cy.get('[data-cy="label-name"]').click();
-    cy.get('[data-cy="input-name"]').should('have.focus').type('Fucking Vladimir').should('be.visible');
+    cy.get('[data-cy="input-name"]').should('have.focus').clear().type('Fucking Vladimir').should('be.visible');
 
     cy.get('[data-cy="label-surname"]').click();
     cy.get('[data-cy="input-surname"]').should('have.focus').type('Putin').should('be.visible');
@@ -25,8 +34,13 @@ describe('Forms', () => {
     cy.get('[data-cy="label-zipcode"]').click();
     cy.get('[data-cy="input-zipcode"]').should('be.focused').type('From fucking kremlin').should('be.visible');
 
+    submitBtn.click();
+
+    cy.contains(/This fields are required, you must choose your gender and sexuality/i);
+    cy.contains(/This field is required/i);
+
     cy.get('[data-cy="label-birthday"]').click();
-    cy.get('[data-cy="input-birthday"]').should('have.focus').type('2023-05-01').should('have.value', '2023-05-01').should('be.visible');
+    cy.get('[data-cy="input-birthday"]').should('have.focus').type('2017-05-01').should('have.value', '2017-05-01').should('be.visible');
 
     cy.get('[data-cy="label-delivery"]').click();
     cy.get('[data-cy="input-delivery"]').should('have.focus').type('2023-07-29').should('have.value', '2023-07-29').should('be.visible');
@@ -41,6 +55,8 @@ describe('Forms', () => {
     cy.get('[data-cy="label-img"]').click();
     cy.get('[data-cy="input-img"]').should('have.focus').selectFile('src/assets/img/Roadmap.jpeg').should('have.value', 'C:\\fakepath\\Roadmap.jpeg');
 
+    cy.contains(/This fields are required, you must choose your gender and sexuality/i);
+
     cy.get('[data-cy="input-radio-sexuality"]').check('hetero').should('be.checked');
 
     cy.get('[data-cy="input-radio-gender"]').check('male').should('be.checked');
@@ -53,12 +69,15 @@ describe('Forms', () => {
     cy.get('[data-cy="input-checkbox-checkboxes"]').uncheck('sms');
     cy.get('[data-cy="input-checkbox-checkboxes"]').should('have.value', 'email').should('be.checked');
 
-    cy.get('[data-cy="submit-btn"]').click();
+    cy.get('[data-cy="label-birthday"]').click();
+    cy.get('[data-cy="input-birthday"]').should('have.focus').type('2021-05-01').should('have.value', '2021-05-01').should('be.visible');
+
+    submitBtn.click();
 
     cy.get('[data-cy="label-birthday"]').click();
-    cy.get('[data-cy="input-birthday"]').should('have.focus').type('2005-05-01').should('have.value', '2005-05-01').should('be.visible');
+    cy.get('[data-cy="input-birthday"]').should('have.focus').type('2017-05-01').should('have.value', '2017-05-01').should('be.visible');
 
-    cy.get('[data-cy="submit-btn"]').click();
+    submitBtn.click();
 
     cy.contains(Messages.successSent);
     cy.contains('Fucking Vladimir');
