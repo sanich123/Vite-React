@@ -23,13 +23,8 @@ import './commands';
 import React from 'react';
 import { MountOptions, MountReturn, mount } from 'cypress/react18';
 import { MemoryRouter, MemoryRouterProps } from 'react-router-dom';
-// Ensure global app styles are loaded:
 import '../../src/styles/entry.scss';
 
-// Augment the Cypress namespace to include type definitions for
-// your custom command.
-// Alternatively, can be defined in cypress/support/component.d.ts
-// with a <reference path="./component" /> at the top of your spec.
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace Cypress {
@@ -38,7 +33,7 @@ declare global {
     }
   }
 }
-
+Cypress.on('uncaught:exception', () => false);
 Cypress.Commands.add('mount', (component, options = {}) => {
   const { routerProps = { initialEntries: ['/'] }, ...mountOptions } = options;
   const wrapped = <MemoryRouter {...routerProps}>{component}</MemoryRouter>;

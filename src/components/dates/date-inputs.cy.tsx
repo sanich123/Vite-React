@@ -16,7 +16,7 @@ describe('Date-inputs', () => {
     );
     cy.get('[data-cy="label-birthday"]').click();
     cy.get('[data-cy="input-birthday"]').should('have.focus').type('2023-05-01').should('have.value', '2023-05-01');
-  
+
     cy.get('[data-cy="label-delivery"]').click();
     cy.get('[data-cy="input-delivery"]').should('have.focus').type('2023-07-29').should('have.value', '2023-07-29');
 

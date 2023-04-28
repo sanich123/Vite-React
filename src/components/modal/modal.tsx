@@ -27,7 +27,7 @@ export default function Modal({ users, idUser, setIsShowMore }: ModalProps) {
 
   return (
     <>
-      <section className={modal}>
+      <section className={modal} data-cy="modal-window">
         <RemoveScroll>
           <FocusLock>
             <div className={card}>
@@ -38,7 +38,7 @@ export default function Modal({ users, idUser, setIsShowMore }: ModalProps) {
                 <div className="card__address--suite">{`Flat: ${suite}`}</div>
                 <div className="card__address--zipcode">{`Zipcode: ${zipcode}`}</div>
                 <div className="card__address--phone">{`Phone: ${phone}`}</div>
-                <button type="button" className={closeBtn} onClick={() => setIsShowMore(false)}>
+                <button type="button" className={closeBtn} onClick={() => setIsShowMore(false)} data-cy="close-btn">
                   ⨉
                 </button>
               </div>
