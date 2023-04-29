@@ -2,7 +2,7 @@
 
 describe('Navigation testing', () => {
   beforeEach(() => {
-    cy.visit('https://earnest-gumdrop-70048e.netlify.app/');
+    cy.visit('/');
   });
   it('interracts with the user', async () => {
     const input = cy.get('.input-search');

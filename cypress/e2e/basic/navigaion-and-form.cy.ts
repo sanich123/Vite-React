@@ -2,7 +2,7 @@
 
 describe('Navigation testing', () => {
   beforeEach(() => {
-    cy.visit('https://earnest-gumdrop-70048e.netlify.app/');
+    cy.visit('/');
   });
   it('correctly navigate through the app', () => {
     cy.contains(/forms/i).click();
