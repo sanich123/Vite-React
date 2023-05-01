@@ -4,7 +4,7 @@ describe('Navigation testing', () => {
   beforeEach(() => {
     cy.visit('/');
   });
-  it('interracts with the user', async () => {
+  it('interracts with the user', () => {
     cy.get('.input-search').type('leanne{enter}');
     cy.get('button').contains('Show more').click();
     cy.get('button').contains('⨉').click();
