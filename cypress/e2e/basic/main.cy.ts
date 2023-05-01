@@ -5,12 +5,11 @@ describe('Navigation testing', () => {
     cy.visit('/');
   });
   it('interracts with the user', async () => {
-    const input = cy.get('.input-search');
-    input.type('leanne{enter}');
+    cy.get('.input-search').type('leanne{enter}');
     cy.get('button').contains('Show more').click();
     cy.get('button').contains('⨉').click();
-    input.clear();
-    input.type('nicholas{enter}');
+    cy.get('.input-search').clear();
+    cy.get('.input-search').type('nicholas{enter}');
     cy.get('button').contains('Show more').click();
     cy.get('button').contains('⨉').click();
   });

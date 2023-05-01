@@ -16,9 +16,10 @@
     "preview": "cross-env NODE_ENV=production node server",
     "cy:coverage": "npx nyc report --reporter=text-summary",
     "cy:open": "cypress open",
+    "cy:e2e-running": "cypress run --e2e",
     "cy:open-e2e": "cypress open --e2e --browser chrome",
     "cy:open-unit": "cypress open --component --browser chrome",
-    "cy:run-e2e": "cypress run --e2e",
+    "cy:run-e2e": "start-server-and-test start http-get://localhost:5173 cy:e2e-running",
     "cy:run-unit": "cypress run --component",
     "cy:e2e": "start-server-and-test start http-get://localhost:5173 cy:open-e2e"
   },
@@ -73,7 +74,8 @@
     "vite": "^4.1.0",
     "vite-plugin-istanbul": "^4.0.1",
     "vitest": "^0.29.2",
-    "vitest-fetch-mock": "^0.2.2"
+    "vitest-fetch-mock": "^0.2.2",
+    "wait-on": "^7.0.1"
   },
   "eslintConfig": {
     "extends": [
